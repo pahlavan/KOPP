@@ -2,14 +2,15 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Experimental.U2D;
 
 public class PlanetScript : MonoBehaviour
 {
     public List<GameObject> OutgoingPlanets;
     public Text text;
+    public bool isSelected = false;
 
     private int selectionTime = 0;
-    private bool isSelected = false;
     private SpriteRenderer spriteRenderer;
 
     void DrawLine(Vector3 start, Vector3 end, Color color)
@@ -18,9 +19,12 @@ public class PlanetScript : MonoBehaviour
         myLine.transform.position = start;
         myLine.AddComponent<LineRenderer>();
         LineRenderer lr = myLine.GetComponent<LineRenderer>();
+
         //lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
-        lr.SetColors(color, color);
-        lr.SetWidth(0.1f, 0.1f);
+        lr.startColor = color;
+        lr.endColor = color;
+        lr.startWidth = 0.1f;
+        lr.endWidth = 0.1f;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
     }
@@ -44,7 +48,7 @@ public class PlanetScript : MonoBehaviour
         }
         else
         {
-            selectionTime = 100;
+            selectionTime = 50;
         }
     }
 
