@@ -98,6 +98,12 @@ MonoBehaviour:
   OutgoingPlanets: []
   text: {fileID: 0}
   isSelected: 0
+  actionMenuHandler: {fileID: 8555474348949666457, guid: 51f3e72e563ade94882397b59625714f,
+    type: 3}
+  Actions:
+  - {fileID: 4022409193685092542, guid: f9adacf0832734e45acc4971e628a462, type: 3}
+  - {fileID: 3741431553294788199, guid: 2f32911472fdaed4295a4ed8185e22de, type: 3}
+  - {fileID: 3664964585807666822, guid: 2382fcc77bb9b784c809cc30219096da, type: 3}
 --- !u!58 &58591344302793610
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -131,8 +137,38 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1145324708290773935}
-          m_MethodName: SelectPlanet
+        - m_Target: {fileID: 6158883763212327113}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6158883763212327113}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6158883763212327113}
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

@@ -9,7 +9,10 @@ public class PlanetScript : MonoBehaviour
     public List<GameObject> OutgoingPlanets;
     public Text text;
     public bool isSelected = false;
-
+    public GameObject actionMenuHandler;
+    public List<GameObject> Actions;
+    
+    private GameObject actionMenu;
     private int selectionTime = 0;
     private SpriteRenderer spriteRenderer;
 
@@ -32,7 +35,12 @@ public class PlanetScript : MonoBehaviour
     public void SelectPlanet()
     {
         //selectionTime = 100000;
-        isSelected = !isSelected;
+        isSelected = true;
+    }
+
+    private void OnMouseDown()
+    {
+        SelectPlanet();
     }
 
     void CheckSelection()
@@ -86,8 +94,39 @@ public class PlanetScript : MonoBehaviour
         //}
     }
 
-    void OnMouseDown()
+    private void OnMouseEnter()
     {
-        isSelected = !isSelected;
+        ShowActionMenu();
+    }
+
+    public void ShowActionMenu()
+    {
+        switch (ActionMenuScript.enabledActions.Count)
+        {
+            case 0:
+                ActionMenuScript.enabledActions.Add(Actions[0]);
+                break;
+            case 1:
+                ActionMenuScript.enabledActions.Add(Actions[1]);
+                break;
+            case 2:
+                ActionMenuScript.enabledActions.Add(Actions[2]);
+                break;
+            default:
+                break;
+        }
+
+        actionMenu = Instantiate(actionMenuHandler);
+        actionMenu.GetComponent<ActionMenuScript>().Respwan(gameObject);
+    }
+
+    private void OnMouseExit()
+    {
+        HideActionMenu();
+    }
+
+    public void HideActionMenu()
+    {
+        actionMenu.GetComponent<ActionMenuScript>().Collapse();
     }
 }

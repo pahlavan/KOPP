@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Planet
+  - Action
   layers:
   - Default
   - TransparentFX
@@ -46,4 +48,7 @@ TagManager:
     locked: 0
   - name: Spaceship
     uniqueID: 3174907895
+    locked: 0
+  - name: Actions
+    uniqueID: 2489322565
     locked: 0
