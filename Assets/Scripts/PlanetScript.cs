@@ -128,5 +128,6 @@ public class PlanetScript : MonoBehaviour
     public void HideActionMenu()
     {
         actionMenu.GetComponent<ActionMenuScript>().Collapse();
+        actionMenu = null; // TODO : Is this safe?
     }
 }
