@@ -56,7 +56,8 @@ public class SpaceshipScript : MonoBehaviour
     void AdjustShipRotation()
     {
         ShipBody.transform.rotation = Quaternion.identity;
-        ShipBody.transform.Rotate(0, 0, - Vector3.Angle(new Vector3(0, 1, 0), nextHop.transform.position - transform.position));
+        int directionMult = transform.position.x < nextHop.transform.position.x ? -1 : +1;
+        ShipBody.transform.Rotate(0, 0, directionMult * Vector3.Angle(new Vector3(0, 1, 0), nextHop.transform.position - transform.position));
     }
 
     // Update is called once per frame

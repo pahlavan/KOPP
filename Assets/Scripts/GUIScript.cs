@@ -224,4 +224,9 @@ public class GUIScript : MonoBehaviour
 
         return 0;
     }
+
+    public int GetActionCooldownDuration()
+    {
+        return 4;
+    }
 }
