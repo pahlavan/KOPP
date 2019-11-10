@@ -33,7 +33,8 @@ public class PlanetScript : MonoBehaviour
     private string distinguishedMenuButton;
     private bool includeDistinguiedButton;
     private string activeAction;
-
+    private IDictionary<string, float> actionCooldown;
+    
     void DrawLine(Vector3 start, Vector3 end, Color color)
     {
         GameObject myLine = new GameObject();
@@ -114,7 +115,7 @@ public class PlanetScript : MonoBehaviour
     {
         foreach(var button in UIButtons)
         {
-            button.interactable = state || button.name == activeAction;
+            button.interactable = (state || button.name == activeAction) && (actionCooldown[button.name] <= Time.time);
         }
     }
 
@@ -160,6 +161,7 @@ public class PlanetScript : MonoBehaviour
             distinguishedMenuButton = activeAction;
             includeDistinguiedButton = true;
             CollapseMenu();
+            actionCooldown[activeAction] = Time.time + guiScript.GetActionCooldownDuration();
             activeAction = null;
         }
     }
@@ -185,6 +187,12 @@ public class PlanetScript : MonoBehaviour
         planetAnimator = CooldownAnimation.GetComponent<Animator>();
         distinguishedMenuButton = null;
         activeAction = null;
+        actionCooldown = new Dictionary<string, float>(StringComparer.OrdinalIgnoreCase);
+
+        foreach(var button in UIButtons)
+        {
+            actionCooldown[button.name] = -1;
+        }
     }
     
     void Update()
