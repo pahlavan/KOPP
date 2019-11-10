@@ -171,7 +171,6 @@ public class PlanetScript : MonoBehaviour
             {
                 planetState = PlanetState.Available;
                 spriteRenderer.color = Color.white;
-                EnableMenuActions(true);
             }
         }
     }
@@ -198,6 +197,14 @@ public class PlanetScript : MonoBehaviour
     
     void Update()
     {
+        if (planetState != PlanetState.Available || guiScript.isOverheat)
+        {
+            EnableMenuActions(false);
+        }
+        else
+        {
+            EnableMenuActions(true);
+        }
     }
 
     int CalculateStepCount(float duration)
@@ -231,7 +238,6 @@ public class PlanetScript : MonoBehaviour
         planetState = PlanetState.DangerZone;
         planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.DangerZone);
         spriteRenderer.color = Color.green;
-        EnableMenuActions(false);
         guiScript.OnActionPerformed(ActionType.DangerZone);
     }
 
@@ -242,7 +248,6 @@ public class PlanetScript : MonoBehaviour
         planetState = PlanetState.Detour;
         planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.Detour);
         spriteRenderer.color = Color.blue;
-        EnableMenuActions(false);
         guiScript.OnActionPerformed(ActionType.Detour);
     }
 
@@ -253,7 +258,6 @@ public class PlanetScript : MonoBehaviour
         planetState = PlanetState.SecurityCheck;
         planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.SecurityCheck);
         spriteRenderer.color = Color.red;
-        EnableMenuActions(false);
         guiScript.OnActionPerformed(ActionType.SecurityCheck);
     }
 
