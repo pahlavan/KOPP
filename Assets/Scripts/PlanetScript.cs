@@ -3,18 +3,28 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Experimental.U2D;
+using UnityEditorInternal;
+using System;
+using UnityEditor;
 
 public class PlanetScript : MonoBehaviour
 {
     public List<GameObject> OutgoingPlanets;
-    public Text text;
     public bool isSelected = false;
-    public GameObject actionMenuHandler;
-    public List<GameObject> Actions;
-    
-    private GameObject actionMenu;
+    public List<Button> UIButtons;
+    public static IList<string> EnabledActions = new List<string>();
+    public float menuAnimationDuration;
+
+    private MenuState menuState;
     private int selectionTime = 0;
     private SpriteRenderer spriteRenderer;
+    private int menuTransitionStep;
+    private int menuTotalSteps;
+    private float menuRadius;
+    private int menuDegreeOffset;
+    private List<Button> activeButtons;
+    private float originalColliderRadius;
+    private float menuColliderRadius;
 
     void DrawLine(Vector3 start, Vector3 end, Color color)
     {
@@ -34,7 +44,6 @@ public class PlanetScript : MonoBehaviour
 
     public void SelectPlanet()
     {
-        //selectionTime = 100000;
         isSelected = true;
     }
 
@@ -43,9 +52,76 @@ public class PlanetScript : MonoBehaviour
         SelectPlanet();
     }
 
+    void MoveMenuButtons(int step)
+    {
+        if (step < 0 || step > menuTotalSteps) { throw new ArgumentException(nameof(step)); }
+
+        int percent = step * 100 / menuTotalSteps;
+
+        int i = 0;
+        foreach (Button action in activeButtons)
+        {
+            var vec = Quaternion.Euler(0, 0, menuDegreeOffset * i++) * new Vector3(0, menuRadius * percent / 100, 0);
+            action.transform.localPosition = vec;
+        }
+    }
+
+    public void ShowActionMenu()
+    {
+        switch (EnabledActions.Count)
+        {
+            case 0:
+                EnabledActions.Add(UIButtons[0].name);
+                break;
+            case 1:
+                EnabledActions.Add(UIButtons[1].name);
+                break;
+            case 2:
+                EnabledActions.Add(UIButtons[2].name);
+                break;
+            default:
+                break;
+        }
+
+        gameObject.GetComponent<CircleCollider2D>().radius = menuColliderRadius;
+
+        switch (menuState)
+        {
+            case MenuState.Collapsing:
+                menuTransitionStep = menuTotalSteps - menuTransitionStep;
+                menuState = MenuState.Respawning;
+                break;
+            case MenuState.Respawning:
+                break;
+            case MenuState.Active:
+                break;
+            case MenuState.Disable:
+                menuTransitionStep = menuTotalSteps;
+                menuState = MenuState.Respawning;
+                break;
+        }
+
+        activeButtons = new List<Button>();
+        foreach(var button in UIButtons)
+        {
+            if (EnabledActions.Contains(button.name))
+            {
+                activeButtons.Add(button);
+            }
+        }
+
+        menuDegreeOffset = 360 / activeButtons.Count;
+    }
+
+    public void CollapseMenu()
+    {
+        menuState = MenuState.Collapsing;
+        menuTransitionStep = menuTotalSteps;
+        gameObject.GetComponent<CircleCollider2D>().radius = originalColliderRadius;
+    }
+
     void CheckSelection()
     {
-        //text.text = selectionTime.ToString();
         if(isSelected)
         {
             selectionTime--;
@@ -60,6 +136,37 @@ public class PlanetScript : MonoBehaviour
         }
     }
 
+    void AnimateMenu()
+    {
+        if (menuTransitionStep > 0)
+        {
+            menuTransitionStep--;
+
+            switch (menuState)
+            {
+                case MenuState.Respawning:
+                    MoveMenuButtons(menuTotalSteps - menuTransitionStep);
+                    break;
+                case MenuState.Collapsing:
+                    MoveMenuButtons(menuTransitionStep);
+                    break;
+            }
+
+            if (menuTransitionStep <= 0)
+            {
+                switch (menuState)
+                {
+                    case MenuState.Respawning:
+                        menuState = MenuState.Active;
+                        break;
+                    case MenuState.Collapsing:
+                        menuState = MenuState.Disable;
+                        break;
+                }
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +176,12 @@ public class PlanetScript : MonoBehaviour
         }
 
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        menuTotalSteps = (int)(menuAnimationDuration / Time.fixedDeltaTime);
+        menuTransitionStep = 0;
+        menuRadius = spriteRenderer.bounds.size.x * 0.7f;
+        menuState = MenuState.Disable;
+        originalColliderRadius = gameObject.GetComponent<CircleCollider2D>().radius;
+        menuColliderRadius = originalColliderRadius * 2.2f;
     }
     
     void Update()
@@ -88,46 +201,32 @@ public class PlanetScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    isSelected = true;
-        //}
+        if (menuState != MenuState.Active && menuState != MenuState.Disable)
+        {
+            AnimateMenu();
+        }
     }
 
-    private void OnMouseEnter()
+    public void OnMouseEnter()
     {
         ShowActionMenu();
     }
 
-    public void ShowActionMenu()
+    public void TestButton1()
     {
-        switch (ActionMenuScript.enabledActions.Count)
-        {
-            case 0:
-                ActionMenuScript.enabledActions.Add(Actions[0]);
-                break;
-            case 1:
-                ActionMenuScript.enabledActions.Add(Actions[1]);
-                break;
-            case 2:
-                ActionMenuScript.enabledActions.Add(Actions[2]);
-                break;
-            default:
-                break;
-        }
-
-        actionMenu = Instantiate(actionMenuHandler);
-        actionMenu.GetComponent<ActionMenuScript>().Respwan(gameObject);
+        Debug.Log("button 1");
     }
 
-    private void OnMouseExit()
+    public void OnMouseExit()
     {
-        HideActionMenu();
+        CollapseMenu();
     }
 
-    public void HideActionMenu()
+    enum MenuState
     {
-        actionMenu.GetComponent<ActionMenuScript>().Collapse();
-        actionMenu = null; // TODO : Is this safe?
+        Respawning,
+        Active,
+        Collapsing,
+        Disable,
     }
 }
