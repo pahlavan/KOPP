@@ -86,7 +86,7 @@ public class GUIScript : MonoBehaviour
     public void IncDamage()
     {
         Damage++;
-        if (Damage >= damageIcons.Length)
+        if (!isGameOver && Damage >= damageIcons.Length)
         {
             isGameOver = true;
             GameObject.Find("GameOverText").GetComponent<Text>().enabled = true;
