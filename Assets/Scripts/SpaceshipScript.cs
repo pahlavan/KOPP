@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class SpaceshipScript : MonoBehaviour
 {
     public GameObject InitialPlanet;
-    public float Speed = (float)0.1;
     public GameObject FuelBar;
     public int MaxFuel;
+    public float ShipVelocity;
+    public GameObject ShipBody;
 
     private bool inFlight = true;
     private bool isInitialized = false;
-    private int fuel = 0;
+    private float fuel = 0;
 
     private GameObject nextHop;
     private GameObject lastHop;
@@ -52,6 +53,12 @@ public class SpaceshipScript : MonoBehaviour
         gui = GameObject.Find("GUICanvas").GetComponent<GUIScript>();
     }
 
+    void AdjustShipRotation()
+    {
+        ShipBody.transform.rotation = Quaternion.identity;
+        ShipBody.transform.Rotate(0, 0, - Vector3.Angle(new Vector3(0, 1, 0), nextHop.transform.position - transform.position));
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -70,10 +77,10 @@ public class SpaceshipScript : MonoBehaviour
                 nextHop = lastHop;
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, nextHop.transform.position, Speed);
-            fuel--;
+            transform.position = Vector3.MoveTowards(transform.position, nextHop.transform.position, ShipVelocity / 10);
+            fuel -= ShipVelocity / 4;
 
-            FuelBar.transform.localScale = new Vector3((float)(3.424 * fuel / MaxFuel), 0.639f, 1);
+            FuelBar.transform.localScale = new Vector3((float)(3.424 * fuel / 100), 0.639f, 1);
 
             if (transform.position == nextHop.transform.position)
             {
@@ -86,10 +93,11 @@ public class SpaceshipScript : MonoBehaviour
             }
         }
 
+        AdjustShipRotation();
+
         if (fuel <= 0 || !inFlight)
         {
             Destroy(gameObject);
         }
-
     }
 }
