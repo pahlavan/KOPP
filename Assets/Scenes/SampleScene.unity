@@ -1450,7 +1450,7 @@ PrefabInstance:
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -1461,7 +1461,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OutgoingPlanets.Array.data[1]
       value: 
-      objectReference: {fileID: 665377282}
+      objectReference: {fileID: 457933018}
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.data[2]
@@ -5736,7 +5736,7 @@ PrefabInstance:
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -5747,7 +5747,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OutgoingPlanets.Array.data[1]
       value: 
-      objectReference: {fileID: 2045744237}
+      objectReference: {fileID: 928374109}
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.data[2]

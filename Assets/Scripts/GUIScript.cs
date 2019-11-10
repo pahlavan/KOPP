@@ -64,6 +64,7 @@ public class GUIScript : MonoBehaviour
         damageIcons = GameObject.FindGameObjectsWithTag("DamageIcon");
         dialog = GameObject.Find("DialogCanvas").GetComponent<DialogScript>();
         incomeTime = Time.time;
+        Points = 1000;
     }
 
     void FixedUpdate()
@@ -206,9 +207,9 @@ public class GUIScript : MonoBehaviour
 
         switch (type)
         {
-            case ActionType.DangerZone: return (new List<int>() { 5, 8, 12 })[power];
-            case ActionType.SecurityCheck: return (new List<int>() { 5, 8, 12 })[power];
-            case ActionType.Detour: return (new List<int>() { 5, 8, 12 })[power];
+            case ActionType.DangerZone: return (new List<int>() { 5, 8, 12 })[power-1];
+            case ActionType.SecurityCheck: return (new List<int>() { 5, 8, 12 })[power-1];
+            case ActionType.Detour: return (new List<int>() { 5, 8, 12 })[power-1];
         }
 
         return 0;
