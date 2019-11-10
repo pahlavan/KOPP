@@ -243,7 +243,7 @@ public class PlanetScript : MonoBehaviour
     {
         if (activeAction != null || distinguishedMenuButton != null) return;
 
-        if (OutgoingPlanets.Count == 0 || incomingPlanets.Count == 0)
+        if (OutgoingPlanets.Count == 0)
         {
             EnableMenuActions(false);
         }
