@@ -55,11 +55,6 @@ public class PlanetScript : MonoBehaviour
         lr.SetPosition(1, end);
     }
 
-    public void SelectPlanet()
-    {
-        isSelected = true;
-    }
-
     void MoveMenuButtons(int step)
     {
         if (step < 0 || step > menuTotalSteps) { throw new ArgumentException(nameof(step)); }

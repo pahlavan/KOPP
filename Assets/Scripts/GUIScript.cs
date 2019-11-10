@@ -21,7 +21,7 @@ public class Action
 public class GUIScript : MonoBehaviour
 {
     public int Points = 0;
-    public int Heat = 0;
+    public float Heat = 0;
     public bool isOverheat = false;
 
     public List<Sprite> dangerDialSprites;
@@ -29,8 +29,8 @@ public class GUIScript : MonoBehaviour
     public List<Sprite> randomDialSprites;
 
     public static readonly int MaxPower = 3;
-    public static readonly int MaxHeat = 10;
-    public static readonly int OverheatCooldown = 5;
+    public static readonly int MaxHeat = 20;
+    public static readonly int OverheatCooldown = 10;
 
     private List<List<Sprite>> sprites;
     private int overheatCounter = 0;
@@ -56,14 +56,15 @@ public class GUIScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isOverheat)
+        Heat = Math.Max(0, Heat - MaxHeat / ((float)OverheatCooldown / Time.fixedDeltaTime));
+        
+        if (isOverheat && Heat == 0)
         {
-            overheatCounter++;
-            if (overheatCounter * Time.fixedDeltaTime >= OverheatCooldown)
-            {
-                isOverheat = false;
-                Heat = 0;
-            }
+            // overheatCounter++;
+            //float timeLeftSeconds = Math.Max(0, OverheatCooldown - overheatCounter * Time.fixedDeltaTime);
+            //Heat = (int) (((float)timeLeftSeconds / OverheatCooldown) * MaxHeat);
+            
+            isOverheat = false;
         }
     }
 
@@ -73,10 +74,11 @@ public class GUIScript : MonoBehaviour
         if (timer++ % 100 == 0) Points++;
 
         GameObject.Find("PointsText").GetComponent<Text>().text = "Points: " + Points;
-        Text heatText = GameObject.Find("HeatText").GetComponent<Text>();
-        heatText.text = "Heat: " + Heat;
-        heatText.color = isOverheat ? Color.red : Color.black;
-
+        //Text heatText = GameObject.Find("HeatText").GetComponent<Text>();
+        //heatText.text = "Heat: " + Heat;
+        //heatText.color = isOverheat ? Color.red : Color.black;
+        //Debug.Log("Heat: " + Heat);
+        GameObject.Find("HeatBar").GetComponent<Warning_ctrl>().WarningLevel = (int)(((float)Heat / MaxHeat) * 8.0);
         var gauges = GameObject.FindGameObjectsWithTag("Gauge");
 
         int i = 0;
@@ -120,6 +122,8 @@ public class GUIScript : MonoBehaviour
 
     public void OnActionPerformed(ActionType type)
     {
+        if (isOverheat) return;
+
         var action = actions.Find(a => a.type == type);
         Heat = Math.Min(MaxHeat, Heat + GetActionHeat(action.type, action.power));
         if (Heat == MaxHeat)
