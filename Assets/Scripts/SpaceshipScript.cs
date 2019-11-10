@@ -48,7 +48,7 @@ public class SpaceshipScript : MonoBehaviour
                 }
             }
 
-            nextHop = options[UnityEngine.Random.Range(0, cnt)];
+            nextHop = forwardOption[UnityEngine.Random.Range(0, cnt)];
         }
     }
 
