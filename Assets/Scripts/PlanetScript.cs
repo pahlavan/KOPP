@@ -36,10 +36,11 @@ public class PlanetScript : MonoBehaviour
     private float menuColliderRadius;
     private GUIScript guiScript;
 
-    private int totalPlanetStateSteps;
-    private int planetTransitionStep;
     private Animator planetAnimator;
     private float planetStateTransitionTime;
+    private string distinguishedMenuButton;
+    private bool includeDistinguiedButton;
+    private string activeAction;
 
     void DrawLine(Vector3 start, Vector3 end, Color color)
     {
@@ -51,8 +52,8 @@ public class PlanetScript : MonoBehaviour
         //lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
         lr.startColor = color;
         lr.endColor = color;
-        lr.startWidth = 0.1f;
-        lr.endWidth = 0.1f;
+        lr.startWidth = 0.2f;
+        lr.endWidth = 0.2f;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
     }
@@ -66,8 +67,14 @@ public class PlanetScript : MonoBehaviour
         int i = 0;
         foreach (Button action in activeButtons)
         {
-            var vec = Quaternion.Euler(0, 0, menuDegreeOffset * i++) * new Vector3(0, menuRadius * percent / 100, 0);
-            action.transform.localPosition = vec;
+            if (distinguishedMenuButton == null || (includeDistinguiedButton && action.name == distinguishedMenuButton)
+               || (!includeDistinguiedButton && action.name != distinguishedMenuButton))
+            {
+                var vec = Quaternion.Euler(0, 0, menuDegreeOffset * i) * new Vector3(0, menuRadius * percent / 100, 0);
+                action.transform.localPosition = vec;
+            }
+
+            i++;
         }
     }
 
@@ -115,7 +122,7 @@ public class PlanetScript : MonoBehaviour
     {
         foreach(var button in UIButtons)
         {
-            button.interactable = state;
+            button.interactable = state || button.name == activeAction;
         }
     }
 
@@ -146,23 +153,22 @@ public class PlanetScript : MonoBehaviour
                         menuState = MenuState.Disable;
                         break;
                 }
+
+                distinguishedMenuButton = null;
             }
         }
     }
 
     void AnimatePlanet()
     {
-        if (planetTransitionStep > 0)
+        if (Time.time >= planetStateTransitionTime)
         {
-            //planetTransitionStep--;
-
-            //if (planetTransitionStep == 0)
-            if (Time.time >= planetStateTransitionTime)
-            {
-                planetState = PlanetState.Available;
-                CooldownAnimation.SetActive(false);
-                spriteRenderer.color = Color.white;
-            }
+            planetState = PlanetState.Available;
+            CooldownAnimation.SetActive(false);
+            distinguishedMenuButton = activeAction;
+            includeDistinguiedButton = true;
+            CollapseMenu();
+            activeAction = null;
         }
     }
 
@@ -185,6 +191,8 @@ public class PlanetScript : MonoBehaviour
 
         planetState = PlanetState.Available;
         planetAnimator = CooldownAnimation.GetComponent<Animator>();
+        distinguishedMenuButton = null;
+        activeAction = null;
     }
     
     void Update()
@@ -220,7 +228,16 @@ public class PlanetScript : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        ShowActionMenu();
+        if (activeAction != null || distinguishedMenuButton != null) return;
+
+        if (OutgoingPlanets.Count == 0)
+        {
+            EnableMenuActions(false);
+        }
+        else
+        {
+            ShowActionMenu();
+        }
     }
 
     void TriggerTimerAnimation(float duration)
@@ -230,41 +247,51 @@ public class PlanetScript : MonoBehaviour
         planetAnimator.Play("Cooldown");
     }
 
-    void PrepareActionExecution(float duration)
+    void PrepareActionExecution(float duration, string action)
     {
+        activeAction = action;
+        distinguishedMenuButton = activeAction;
+        includeDistinguiedButton = false;
         CollapseMenu();
-        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(duration);
         TriggerTimerAnimation(duration);
         planetStateTransitionTime = Time.time + duration;
     }
 
     public void DangerZoneAction()
     {
+        if (activeAction != null) return;
+
         planetState = PlanetState.DangerZone;
-        spriteRenderer.color = Color.green;
         guiScript.OnActionPerformed(ActionType.DangerZone);
-        PrepareActionExecution(ActionDurations.DangerZone);
+        PrepareActionExecution(ActionDurations.DangerZone, "DangerZone");
     }
 
     public void DetourAction()
     {
+        if (activeAction != null) return;
+        
         planetState = PlanetState.Detour;
-        spriteRenderer.color = Color.blue;
         guiScript.OnActionPerformed(ActionType.Detour);
-        PrepareActionExecution(ActionDurations.DangerZone);
+        PrepareActionExecution(ActionDurations.DangerZone, "Detour");
     }
 
     public void SecurityCheckAction()
     {
+        if (activeAction != null) return;
+        
         planetState = PlanetState.SecurityCheck;
-        spriteRenderer.color = Color.red;
         guiScript.OnActionPerformed(ActionType.SecurityCheck);
-        PrepareActionExecution(ActionDurations.DangerZone);
+        PrepareActionExecution(ActionDurations.DangerZone, "SecurityCheck");
     }
 
     public void OnMouseExit()
     {
-        CollapseMenu();
+        if (activeAction != null || distinguishedMenuButton != null) return;
+
+        if (OutgoingPlanets.Count != 0)
+        {
+            CollapseMenu();
+        }
     }
 
     enum MenuState
