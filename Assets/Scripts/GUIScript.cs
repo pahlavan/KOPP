@@ -63,7 +63,7 @@ public class GUIScript : MonoBehaviour
             delta *= 3;
 
         Heat = Math.Max(0, Heat - delta);
-        bossHologram.enabled = (Heat / MaxHeat) > 0.7;
+        bossHologram.enabled = isOverheat || ((Heat / MaxHeat) > 0.65);
         
         if (isOverheat && Heat == 0)
         {
