@@ -35,7 +35,7 @@ public class SpaceshipScript : MonoBehaviour
         if (cnt == 0)
         {
             inFlight = false;
-            gui.Damage++;
+            gui.IncDamage();
         }
         else
         {

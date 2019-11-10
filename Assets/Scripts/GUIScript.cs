@@ -39,6 +39,8 @@ public class GUIScript : MonoBehaviour
     private GameObject[] damageIcons;
     private float startTime;
     private DialogScript dialog;
+    private bool isGameOver = false;
+    private float finishTime = 0;
 
     private List<Action> actions = new List<Action>(){
         new Action() { type = ActionType.DangerZone, power = 1 },
@@ -81,6 +83,17 @@ public class GUIScript : MonoBehaviour
         }
     }
 
+    public void IncDamage()
+    {
+        Damage++;
+        if (Damage >= damageIcons.Length)
+        {
+            isGameOver = true;
+            GameObject.Find("GameOverText").GetComponent<Text>().enabled = true;
+            finishTime = Time.time;
+        }
+    }
+
     float GetIncomeDelay()
     {
         // start with every 5s with max penalty of 10 
@@ -98,7 +111,7 @@ public class GUIScript : MonoBehaviour
         }
 
         GameObject.Find("PointsText").GetComponent<Text>().text = "Points: " + Points;
-        TimeSpan timeSpan = TimeSpan.FromSeconds(Time.time - startTime);
+        TimeSpan timeSpan = TimeSpan.FromSeconds((isGameOver ? finishTime : Time.time) - startTime);
         string timeStr = string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
         GameObject.Find("Timer").GetComponent<Text>().text = timeStr;
         //Text heatText = GameObject.Find("HeatText").GetComponent<Text>();
