@@ -6,11 +6,12 @@ using UnityEngine;
 public class WaveGeneratorScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public IList<WaveProperty> WaveProperties =
+    public static IList<WaveProperty> WaveProperties =
         new List<WaveProperty> {
-            new WaveProperty { ShipName = "Caraval", GracePriod = 0, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.4f, MaxSpawnRate = 2 },
-            new WaveProperty { ShipName = "Galleon", GracePriod = 20, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.2f, MaxSpawnRate = 2 },
-            new WaveProperty { ShipName = "Frigate", GracePriod = 40, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.2f, MaxSpawnRate = 2 },
+            //new WaveProperty { ShipName = "TemplateShip", GracePriod = 0, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.4f, MaxSpawnRate = 2 },
+            new WaveProperty { ShipName = "Caravel", GracePriod = 0, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.4f, MaxSpawnRate = 2 },
+            new WaveProperty { ShipName = "Galleon", GracePriod = 15, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.2f, MaxSpawnRate = 1 },
+            new WaveProperty { ShipName = "Frigate", GracePriod = 30, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.2f, MaxSpawnRate = 1 },
         };
     public List<GameObject> SpaceshipPrefabs;
     public GameObject InitialPlanet;

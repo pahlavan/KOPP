@@ -5306,7 +5306,7 @@ PrefabInstance:
     - target: {fileID: 521292335357751226, guid: d2bf1cde6e38196468158320f272c0d1,
         type: 3}
       propertyPath: SpaceshipPrefabs.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 521292335357751226, guid: d2bf1cde6e38196468158320f272c0d1,
         type: 3}
@@ -5327,6 +5327,24 @@ PrefabInstance:
     - target: {fileID: 521292335357751226, guid: d2bf1cde6e38196468158320f272c0d1,
         type: 3}
       propertyPath: SpaceshipPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2811789507929882930, guid: 0e54971b3f9bbbd41a415a664bd07d30,
+        type: 3}
+    - target: {fileID: 521292335357751226, guid: d2bf1cde6e38196468158320f272c0d1,
+        type: 3}
+      propertyPath: SpaceshipPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2811789507929882930, guid: 39e8a5c3ed234c749b301f1930e473a3,
+        type: 3}
+    - target: {fileID: 521292335357751226, guid: d2bf1cde6e38196468158320f272c0d1,
+        type: 3}
+      propertyPath: SpaceshipPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 2811789507929882930, guid: b07c57f11abdd1c4394e48a60f595635,
+        type: 3}
+    - target: {fileID: 521292335357751226, guid: d2bf1cde6e38196468158320f272c0d1,
+        type: 3}
+      propertyPath: SpaceshipPrefabs.Array.data[3]
       value: 
       objectReference: {fileID: 2811789507929882930, guid: 88d9bc1a50a98be4b90a44e8161b82fa,
         type: 3}
@@ -5399,26 +5417,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 58591344302793610, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
-        type: 3}
-      propertyPath: m_Radius
-      value: 4.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.size
@@ -5454,6 +5452,26 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[4]
       value: 
       objectReference: {fileID: 675673494}
+    - target: {fileID: 58591344302793610, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Radius
+      value: 4.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!222 &7764427452635972868
