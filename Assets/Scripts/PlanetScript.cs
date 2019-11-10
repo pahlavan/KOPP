@@ -10,10 +10,10 @@ using UnityEditor;
 public class PlanetScript : MonoBehaviour
 {
     public List<GameObject> OutgoingPlanets;
-    public bool isSelected = false;
     public List<Button> UIButtons;
     public float menuAnimationDuration;
     public PlanetState planetState;
+    public GameObject CooldownAnimation;
 
     public static IList<string> EnabledActions = new List<string>();
     public static PlanetActionDurations ActionDurations =
@@ -25,7 +25,6 @@ public class PlanetScript : MonoBehaviour
         };
 
     private MenuState menuState;
-    private int selectionTime = 0;
     private SpriteRenderer spriteRenderer;
     private int menuTransitionStep;
     private int menuTotalSteps;
@@ -52,11 +51,6 @@ public class PlanetScript : MonoBehaviour
         lr.endWidth = 0.1f;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
-    }
-
-    public void SelectPlanet()
-    {
-        isSelected = true;
     }
 
     void MoveMenuButtons(int step)
@@ -202,16 +196,6 @@ public class PlanetScript : MonoBehaviour
     
     void Update()
     {
-        /*CheckSelection();
-
-        if (isSelected)
-        {
-            spriteRenderer.color = Color.red;
-        }
-        else
-        {
-            spriteRenderer.color = Color.white;
-        }*/
     }
 
     int CalculateStepCount(float duration)
