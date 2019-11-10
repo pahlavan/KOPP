@@ -7,6 +7,7 @@ using UnityEditorInternal;
 using System;
 using UnityEditor;
 using System.Linq;
+using UnityEditor.Experimental.U2D;
 
 public class PlanetScript : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class PlanetScript : MonoBehaviour
 
     private int totalPlanetStateSteps;
     private int planetTransitionStep;
+    private Animator planetAnimator;
 
     void DrawLine(Vector3 start, Vector3 end, Color color)
     {
@@ -70,21 +72,6 @@ public class PlanetScript : MonoBehaviour
 
     public void ShowActionMenu()
     {
-        //switch (EnabledActions.Count)
-        //{
-        //    case 0:
-        //        EnabledActions.Add(UIButtons[0].name);
-        //        break;
-        //    case 1:
-        //        EnabledActions.Add(UIButtons[1].name);
-        //        break;
-        //    case 2:
-        //        EnabledActions.Add(UIButtons[2].name);
-        //        break;
-        //    default:
-        //        break;
-        //}
-
         gameObject.GetComponent<CircleCollider2D>().radius = menuColliderRadius;
 
         switch (menuState)
@@ -108,6 +95,7 @@ public class PlanetScript : MonoBehaviour
         {
             if (guiScript.GetEnabledActions().Select(t => t.ToString()).Contains(button.name))
             {
+                button.gameObject.SetActive(true);
                 activeButtons.Add(button);
             }
         }
@@ -193,6 +181,7 @@ public class PlanetScript : MonoBehaviour
         guiScript = GameObject.Find("GUICanvas").GetComponent<GUIScript>();
 
         planetState = PlanetState.Available;
+        planetAnimator = CooldownAnimation.GetComponent<Animator>();
     }
     
     void Update()
@@ -215,6 +204,12 @@ public class PlanetScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        /*if (planetAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
+            //print(planetaniGetCurrentAnimatorStateInfo(0).name)
+            CooldownAnimation.SetActive(false);
+        }*/
+
         if (menuState != MenuState.Active && menuState != MenuState.Disable)
         {
             AnimateMenu();
@@ -231,6 +226,13 @@ public class PlanetScript : MonoBehaviour
         ShowActionMenu();
     }
 
+    void TriggerTimerAnimation(float duration)
+    {
+        //CooldownAnimation.SetActive(true);
+        //planetAnimator.speed = 1f / duration;
+        //planetAnimator.Play("Cooldown");
+    }
+
     public void DangerZoneAction()
     {
         Debug.Log("DangerZoneAction");
@@ -239,6 +241,7 @@ public class PlanetScript : MonoBehaviour
         planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.DangerZone);
         spriteRenderer.color = Color.green;
         guiScript.OnActionPerformed(ActionType.DangerZone);
+        TriggerTimerAnimation(ActionDurations.DangerZone);
     }
 
     public void DetourAction()
@@ -249,6 +252,7 @@ public class PlanetScript : MonoBehaviour
         planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.Detour);
         spriteRenderer.color = Color.blue;
         guiScript.OnActionPerformed(ActionType.Detour);
+        TriggerTimerAnimation(ActionDurations.Detour);
     }
 
     public void SecurityCheckAction()
@@ -259,6 +263,7 @@ public class PlanetScript : MonoBehaviour
         planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.SecurityCheck);
         spriteRenderer.color = Color.red;
         guiScript.OnActionPerformed(ActionType.SecurityCheck);
+        TriggerTimerAnimation(ActionDurations.SecurityCheck);
     }
 
     public void OnMouseExit()
