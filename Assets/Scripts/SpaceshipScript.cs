@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.U2D;
@@ -8,7 +9,7 @@ public class SpaceshipScript : MonoBehaviour
 {
     public GameObject InitialPlanet;
     public GameObject FuelBar;
-    public int MaxFuel;
+    public int MaxFuel = 100;
     public float ShipVelocity;
     public GameObject ShipBody;
 
@@ -47,7 +48,7 @@ public class SpaceshipScript : MonoBehaviour
                 }
             }
 
-            nextHop = forwardOption[Random.Range(0, cnt)];
+            nextHop = forwardOption[UnityEngine.Random.Range(0, cnt)];
         }
     }
 
@@ -90,7 +91,7 @@ public class SpaceshipScript : MonoBehaviour
 
             if (transform.position == nextHop.transform.position)
             {
-                fuel = MaxFuel;
+                fuel = Math.Max(MaxFuel, 150);
 
                 if (nextHop.GetComponent<PlanetScript>().planetState != PlanetState.SecurityCheck)
                 {
