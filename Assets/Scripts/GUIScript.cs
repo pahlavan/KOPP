@@ -127,7 +127,7 @@ public class GUIScript : MonoBehaviour
 
         for (int d = 1; d < damageIcons.Length + 1; d++)
         {
-            damageIcons[d - 1].GetComponent<Image>().color = Damage >= d ? Color.white : new Color(255, 255, 255, 0.3f);
+            damageIcons[d - 1].GetComponent<Image>().color = Damage >= d ? Color.red : new Color(255, 0, 0, 0.5f);
         }
     }
 
