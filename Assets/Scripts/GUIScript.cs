@@ -88,8 +88,8 @@ public class GUIScript : MonoBehaviour
     {
         var action = actions[index];
         if (CanUpgrade(action)) {
-            action.power++;
             Points -= GetUpgradeCost(action.type, action.power);
+            action.power++;
         }
     }
 
