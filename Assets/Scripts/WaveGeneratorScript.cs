@@ -9,9 +9,10 @@ public class WaveGeneratorScript : MonoBehaviour
     public static IList<WaveProperty> WaveProperties =
         new List<WaveProperty> {
             //new WaveProperty { ShipName = "TemplateShip", GracePriod = 0, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.4f, MaxSpawnRate = 2 },
-            new WaveProperty { ShipName = "Caravel", GracePriod = 0, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.4f, MaxSpawnRate = 2 },
-            new WaveProperty { ShipName = "Galleon", GracePriod = 15, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.2f, MaxSpawnRate = 1 },
-            new WaveProperty { ShipName = "Frigate", GracePriod = 30, IntensificationInterval = 10, UnitSpawnRatePerSecond = 0.2f, MaxSpawnRate = 1 },
+            new WaveProperty { ShipName = "Caravel", GracePriod = 0, IntensificationInterval = 20, UnitSpawnRatePerSecond = 0.05f, MaxSpawnRate = 2 },
+            new WaveProperty { ShipName = "Caravel", GracePriod = 0, IntensificationInterval = 100000, UnitSpawnRatePerSecond = 0.2f, MaxSpawnRate = 2 },
+            new WaveProperty { ShipName = "Galleon", GracePriod = 15, IntensificationInterval = 20, UnitSpawnRatePerSecond = 0.05f, MaxSpawnRate = 1 },
+            new WaveProperty { ShipName = "Frigate", GracePriod = 30, IntensificationInterval = 20, UnitSpawnRatePerSecond = 0.05f, MaxSpawnRate = 1 },
         };
     public List<GameObject> SpaceshipPrefabs;
     public GameObject InitialPlanet;

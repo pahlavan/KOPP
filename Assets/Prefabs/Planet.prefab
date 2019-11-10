@@ -298,7 +298,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1649249391
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -8801819111103863087, guid: f35c23453eabeb447aae7b376a6381a9,
     type: 3}
@@ -565,6 +565,8 @@ MonoBehaviour:
   menuAnimationDuration: 0.3
   planetState: 0
   CooldownAnimation: {fileID: 133870591390550628}
+  pathMaterial: {fileID: 2100000, guid: 753aae6479cb10f44994b5fbc533cd88, type: 2}
+  pathColor: {r: 0.4452207, g: 0.6406675, b: 0.6509434, a: 1}
 --- !u!58 &58591344302793610
 CircleCollider2D:
   m_ObjectHideFlags: 0

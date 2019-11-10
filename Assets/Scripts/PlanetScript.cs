@@ -16,6 +16,8 @@ public class PlanetScript : MonoBehaviour
     public float menuAnimationDuration;
     public PlanetState planetState;
     public GameObject CooldownAnimation;
+    public Material pathMaterial;
+    public Color pathColor;
 
     private MenuState menuState;
     private SpriteRenderer spriteRenderer;
@@ -41,11 +43,11 @@ public class PlanetScript : MonoBehaviour
         myLine.AddComponent<LineRenderer>();
         LineRenderer lr = myLine.GetComponent<LineRenderer>();
 
-        //lr.material = new Material(Shader.Find("Particles/Alpha Blended Premultiply"));
-        lr.startColor = color;
-        lr.endColor = color;
-        lr.startWidth = 0.2f;
-        lr.endWidth = 0.2f;
+        lr.material = pathMaterial;
+        lr.startColor = pathColor;
+        lr.endColor = pathColor;
+        lr.startWidth = 4.0f;
+        lr.endWidth = 4.0f;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
     }

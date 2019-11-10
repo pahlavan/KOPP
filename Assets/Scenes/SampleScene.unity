@@ -207,6 +207,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d6707ddfdb982240997c9df583b5b3e,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &12845656 stripped
@@ -349,12 +355,12 @@ PrefabInstance:
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -96.2
+      value: -91
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.9
+      value: -8.1
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -421,6 +427,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d434a3cfcd4e49049aedffe5df00ceed,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &217621583 stripped
@@ -640,12 +652,12 @@ PrefabInstance:
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -106.3
+      value: -105.2
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25.1
+      value: 24.1
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -712,6 +724,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d8233fc58b5a2914f902ca43017f249b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &457933016 stripped
@@ -853,6 +871,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2b9a53f115b058244bba8f6666859544,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &483808070 stripped
@@ -1296,6 +1320,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ece35c257a1674c44b989d3f29837363,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &614956898 stripped
@@ -1365,12 +1395,12 @@ PrefabInstance:
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -148.2
+      value: -147.4
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -32.8
+      value: -30.1
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -1420,13 +1450,13 @@ PrefabInstance:
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.data[0]
       value: 
-      objectReference: {fileID: 217621585}
+      objectReference: {fileID: 1982636122}
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.data[1]
@@ -1442,6 +1472,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[3]
       value: 
       objectReference: {fileID: 1982636122}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9f136c1aac60e7547b3d8eefc938339c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &665377280 stripped
@@ -1511,12 +1547,12 @@ PrefabInstance:
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -237.9
+      value: -237.2
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.3
+      value: -41.3
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -1583,6 +1619,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d8233fc58b5a2914f902ca43017f249b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &675673492 stripped
@@ -1652,12 +1694,12 @@ PrefabInstance:
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -153.1
+      value: -147.2
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -59.3
+      value: -56
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -1724,6 +1766,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ece35c257a1674c44b989d3f29837363,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!1 &697284429 stripped
@@ -1938,6 +1986,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: af8402b21c50f0449afa1bf5bfe1e9e1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!1 &737669406 stripped
@@ -2079,6 +2133,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 2045744237}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 12f25b16385439447abc7fde4ca88f3b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &778647483 stripped
@@ -2225,6 +2285,12 @@ PrefabInstance:
       propertyPath: isSelected
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 027f8663eaca03c4084dbb62abeb990b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!1 &811507189 stripped
@@ -2382,7 +2448,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922002663}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 343}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 944684776}
@@ -2390,8 +2456,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 587.82, y: 318.81}
-  m_SizeDelta: {x: 264.27, y: 442.39}
+  m_AnchoredPosition: {x: 587.34, y: 311.92}
+  m_SizeDelta: {x: 265.21, y: 456.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &922002665
 MonoBehaviour:
@@ -2406,7 +2472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14509805, g: 0.1137255, b: 0.3372549, a: 1}
+  m_Color: {r: 0.13333334, g: 0.121568635, b: 0.3372549, a: 0.81960785}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2516,6 +2582,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 821a02f42275d7f49bc2d580a4f8a351,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &928374107 stripped
@@ -2588,7 +2660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &944684773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2793,6 +2865,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a4588bb70a3a88a40b0a8ea70d608406,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!1 &1087459325 stripped
@@ -2934,6 +3012,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e5a63c6f1aad6224bae9f3e3ef9c7f80,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!1 &1135286059
@@ -3096,6 +3180,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 697284429}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: be0025ac2b7698f4fba66e2d4ebda13d,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!1 &1201265972 stripped
@@ -3355,6 +3445,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8b5677a294d9dec4bbe5ff56d74708f0,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &1240085600 stripped
@@ -3613,8 +3709,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1649249391
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a996f0c4a19a86c4ba2f08bab5d9023e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4150,6 +4246,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 928374109}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 86ec518777d3ab64288a602fb7904de3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &1575164365 stripped
@@ -4290,8 +4392,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1649249391
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2542822149371441771, guid: 904681534c09a164e81bdcc46b524fd1,
     type: 3}
@@ -4559,6 +4661,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 1240085602}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f7504191e941e644cb6baca6432f3dd7,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &1652802941 stripped
@@ -4755,6 +4863,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9ec124d1e3d70e14998edd1daf4c6241,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &1699052247 stripped
@@ -5046,6 +5160,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 417adee33418d8a4fba9c14d517b9fd3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!1 &1883078137 stripped
@@ -5115,12 +5235,12 @@ PrefabInstance:
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -113.6
+      value: -107.1
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -37.9
+      value: -43.9
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -5187,6 +5307,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f7504191e941e644cb6baca6432f3dd7,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &1982636120 stripped
@@ -5256,12 +5382,12 @@ PrefabInstance:
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -128.1
+      value: -130.7
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32.8
+      value: 30.6
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -5311,13 +5437,13 @@ PrefabInstance:
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.data[0]
       value: 
-      objectReference: {fileID: 217621585}
+      objectReference: {fileID: 1982636122}
     - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: OutgoingPlanets.Array.data[1]
@@ -5333,6 +5459,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[3]
       value: 
       objectReference: {fileID: 1982636122}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 500a28dce9118d547aaa7f7d8334ff03,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!1 &2021513899 stripped
@@ -5402,7 +5534,7 @@ PrefabInstance:
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -201.1
+      value: -188.7
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -5474,6 +5606,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 027f8663eaca03c4084dbb62abeb990b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!4 &2025292505 stripped
@@ -5543,12 +5681,12 @@ PrefabInstance:
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -151.5
+      value: -149.7
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.5
+      value: 9.4
       objectReference: {fileID: 0}
     - target: {fileID: 8245889998534625816, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
@@ -5615,6 +5753,12 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[2]
       value: 
       objectReference: {fileID: 928374109}
+    - target: {fileID: 5219910274513401386, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6255ae040874f4e4f85ba280fd6f23f2,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bae31f97b64f942a9c404c2dbb7b3d, type: 3}
 --- !u!1 &2045744237 stripped
@@ -5890,6 +6034,11 @@ PrefabInstance:
       propertyPath: OutgoingPlanets.Array.data[4]
       value: 
       objectReference: {fileID: 675673494}
+    - target: {fileID: 1145324708290773935, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
+        type: 3}
+      propertyPath: pathMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 753aae6479cb10f44994b5fbc533cd88, type: 2}
     - target: {fileID: 58591344302793610, guid: 47bae31f97b64f942a9c404c2dbb7b3d,
         type: 3}
       propertyPath: m_Radius
