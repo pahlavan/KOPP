@@ -1,13 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Experimental.U2D;
-using UnityEditorInternal;
 using System;
-using UnityEditor;
 using System.Linq;
-using UnityEditor.Experimental.U2D;
 
 public class PlanetScript : MonoBehaviour
 {

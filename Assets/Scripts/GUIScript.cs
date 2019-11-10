@@ -30,7 +30,7 @@ public class GUIScript : MonoBehaviour
     public List<Sprite> randomDialSprites;
 
     public static readonly int MaxPower = 3;
-    public static readonly int OverheatCooldown = 25;
+    public static readonly int OverheatCooldown = 32;
     public static readonly float MaxHeat = 20;
 
     private List<List<Sprite>> sprites;
@@ -91,6 +91,7 @@ public class GUIScript : MonoBehaviour
             isGameOver = true;
             GameObject.Find("GameOverText").GetComponent<Text>().enabled = true;
             finishTime = Time.time;
+            UpdateTimer();
         }
     }
 
@@ -99,6 +100,13 @@ public class GUIScript : MonoBehaviour
         // start with every 5s with max penalty of 10 
         float penalty = (Heat / MaxHeat) * 10;
         return 5 + penalty;
+    }
+
+    void UpdateTimer()
+    {
+        TimeSpan timeSpan = TimeSpan.FromSeconds((isGameOver ? finishTime : Time.time) - startTime);
+        string timeStr = string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+        GameObject.Find("Timer").GetComponent<Text>().text = timeStr;
     }
 
     // Update is called once per frame
@@ -111,9 +119,11 @@ public class GUIScript : MonoBehaviour
         }
 
         GameObject.Find("PointsText").GetComponent<Text>().text = "Points: " + Points;
-        TimeSpan timeSpan = TimeSpan.FromSeconds((isGameOver ? finishTime : Time.time) - startTime);
-        string timeStr = string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
-        GameObject.Find("Timer").GetComponent<Text>().text = timeStr;
+
+        if (!isGameOver)
+        {
+            UpdateTimer();
+        }
         //Text heatText = GameObject.Find("HeatText").GetComponent<Text>();
         //heatText.text = "Heat: " + Heat;
         //heatText.color = isOverheat ? Color.red : Color.black;
