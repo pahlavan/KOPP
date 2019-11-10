@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 2811789507929882931}
   - component: {fileID: 2811789507929882928}
   m_Layer: 0
-  m_Name: SpaceshipGroup
+  m_Name: Caraval
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
