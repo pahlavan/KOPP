@@ -38,6 +38,7 @@ public class GUIScript : MonoBehaviour
     private GameObject[] gauges;
     private GameObject[] damageIcons;
     private float startTime;
+    private DialogScript dialog;
 
     private List<Action> actions = new List<Action>(){
         new Action() { type = ActionType.DangerZone, power = 1 },
@@ -61,6 +62,7 @@ public class GUIScript : MonoBehaviour
         bossHologram = GameObject.Find("BossHologram").GetComponent<SpriteRenderer>();
         gauges = GameObject.FindGameObjectsWithTag("Gauge");
         damageIcons = GameObject.FindGameObjectsWithTag("DamageIcon");
+        dialog = GameObject.Find("DialogCanvas").GetComponent<DialogScript>();
     }
 
     void FixedUpdate()
@@ -137,10 +139,17 @@ public class GUIScript : MonoBehaviour
         if (isOverheat) return;
 
         var action = actions.Find(a => a.type == type);
+        float prevHeat = Heat;
         Heat = Math.Min(MaxHeat, Heat + GetActionHeat(action.type, action.power));
         if (Heat == MaxHeat)
         {
             isOverheat = true;
+            dialog.showNewMessage(DialogSource.Commander, "Enough. Don't touch the system. Let's see what's going on!");
+        }
+
+        if (Heat > prevHeat && ((Heat / MaxHeat) > 0.65) && ((prevHeat / MaxHeat) < 0.65))
+        {
+            dialog.showNewMessage(DialogSource.Commander, "What's up with all the alerts? This is not normal...");
         }
     }
 
