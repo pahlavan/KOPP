@@ -17,6 +17,7 @@ public class SpaceshipScript : MonoBehaviour
 
     private GameObject nextHop;
     private GameObject lastHop;
+    private GUIScript gui;
 
     void SelectNextHop()
     {
@@ -27,6 +28,7 @@ public class SpaceshipScript : MonoBehaviour
         if (cnt == 0)
         {
             inFlight = false;
+            gui.Damage++;
         }
         else
         {
@@ -47,6 +49,7 @@ public class SpaceshipScript : MonoBehaviour
     void Start()
     {
         fuel = MaxFuel;
+        gui = GameObject.Find("GUICanvas").GetComponent<GUIScript>();
     }
 
     // Update is called once per frame

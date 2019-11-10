@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Planet
   - Gauge
+  - Action
+  - DamageIcon
   layers:
   - Default
   - TransparentFX

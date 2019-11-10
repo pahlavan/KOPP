@@ -21,6 +21,7 @@ public class Action
 public class GUIScript : MonoBehaviour
 {
     public int Points = 0;
+    public int Damage = 0;
     public float Heat = 0;
     public bool isOverheat = false;
 
@@ -34,6 +35,9 @@ public class GUIScript : MonoBehaviour
 
     private List<List<Sprite>> sprites;
     private SpriteRenderer bossHologram;
+    private GameObject[] gauges;
+    private GameObject[] damageIcons;
+    private float startTime;
 
     private List<Action> actions = new List<Action>(){
         new Action() { type = ActionType.DangerZone, power = 1 },
@@ -46,6 +50,7 @@ public class GUIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startTime = Time.time;
         sprites = new List<List<Sprite>>()
         {
             dangerDialSprites,
@@ -54,6 +59,8 @@ public class GUIScript : MonoBehaviour
         };
 
         bossHologram = GameObject.Find("BossHologram").GetComponent<SpriteRenderer>();
+        gauges = GameObject.FindGameObjectsWithTag("Gauge");
+        damageIcons = GameObject.FindGameObjectsWithTag("DamageIcon");
     }
 
     void FixedUpdate()
@@ -67,10 +74,6 @@ public class GUIScript : MonoBehaviour
         
         if (isOverheat && Heat == 0)
         {
-            // overheatCounter++;
-            //float timeLeftSeconds = Math.Max(0, OverheatCooldown - overheatCounter * Time.fixedDeltaTime);
-            //Heat = (int) (((float)timeLeftSeconds / OverheatCooldown) * MaxHeat);
-            
             isOverheat = false;
         }
     }
@@ -81,12 +84,14 @@ public class GUIScript : MonoBehaviour
         if (timer++ % 100 == 0) Points++;
 
         GameObject.Find("PointsText").GetComponent<Text>().text = "Points: " + Points;
+        TimeSpan timeSpan = TimeSpan.FromSeconds(Time.time - startTime);
+        string timeStr = string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+        GameObject.Find("Timer").GetComponent<Text>().text = timeStr;
         //Text heatText = GameObject.Find("HeatText").GetComponent<Text>();
         //heatText.text = "Heat: " + Heat;
         //heatText.color = isOverheat ? Color.red : Color.black;
         //Debug.Log("Heat: " + Heat);
         GameObject.Find("HeatBar").GetComponent<Warning_ctrl>().WarningLevel = (int)(((float)Heat / MaxHeat) * 8.0);
-        var gauges = GameObject.FindGameObjectsWithTag("Gauge");
 
         int i = 0;
         foreach (Action action in actions)
@@ -103,13 +108,12 @@ public class GUIScript : MonoBehaviour
             int cost = GetUpgradeCost(action.type, action.power);
             upgradeText.text = cost > 0 ? cost.ToString() : "";
 
-            //for (int p = 1; p <= MaxPower; p++)
-            //{
-            //    var costText = gauges[i].transform.Find("cost" + p).GetComponent<Text>();
-            //    costText.text = GetUpgradeCost(action.type, action.power).ToString();
-            //}
-
             i++;
+        }
+
+        for (int d = 1; d < damageIcons.Length + 1; d++)
+        {
+            damageIcons[d - 1].GetComponent<Image>().color = Damage >= d ? Color.white : new Color(255, 255, 255, 0.3f);
         }
     }
 
