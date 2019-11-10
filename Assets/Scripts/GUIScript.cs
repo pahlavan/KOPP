@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public enum ActionType
 {
-    Block,
-    Delay,
-    Suggest,
+    DangerZone,
+    SecurityCheck,
+    Detour,
 }
 
 public class Action
@@ -20,17 +20,24 @@ public class Action
 public class GUIScript : MonoBehaviour
 {
     public int Points = 0;
+    public int Heat = 0;
+    public bool isOverheat = false;
+
     public List<Sprite> dangerDialSprites;
     public List<Sprite> detourDialSprites;
     public List<Sprite> randomDialSprites;
 
-    public static int MaxPower = 3;
+    public static readonly int MaxPower = 3;
+    public static readonly int MaxHeat = 10;
+    public static readonly int OverheatCooldown = 5;
+
     private List<List<Sprite>> sprites;
+    private int overheatCounter = 0;
 
     private List<Action> actions = new List<Action>(){
-        new Action() { type = ActionType.Block, power = 1 },
-        new Action() { type = ActionType.Delay, power = 0 },
-        new Action() { type = ActionType.Suggest, power = 0 },
+        new Action() { type = ActionType.DangerZone, power = 1 },
+        new Action() { type = ActionType.SecurityCheck, power = 0 },
+        new Action() { type = ActionType.Detour, power = 0 },
     };
 
     private int timer = 0;
@@ -46,12 +53,28 @@ public class GUIScript : MonoBehaviour
         };
     }
 
+    void FixedUpdate()
+    {
+        if (isOverheat)
+        {
+            overheatCounter++;
+            if (overheatCounter * Time.fixedDeltaTime >= OverheatCooldown)
+            {
+                isOverheat = false;
+                Heat = 0;
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (timer++ % 100 == 0) Points++;
 
         GameObject.Find("PointsText").GetComponent<Text>().text = "Points: " + Points;
+        Text heatText = GameObject.Find("HeatText").GetComponent<Text>();
+        heatText.text = "Heat: " + Heat;
+        heatText.color = isOverheat ? Color.red : Color.black;
 
         var gauges = GameObject.FindGameObjectsWithTag("Gauge");
 
@@ -87,9 +110,21 @@ public class GUIScript : MonoBehaviour
     public void OnUpgradeClick(int index)
     {
         var action = actions[index];
-        if (CanUpgrade(action)) {
+        if (CanUpgrade(action))
+        {
             Points -= GetUpgradeCost(action.type, action.power);
             action.power++;
+        }
+    }
+
+    public void OnActionPerformed(ActionType type)
+    {
+        var action = actions.Find(a => a.type == type);
+        Heat = Math.Min(MaxHeat, Heat + GetActionHeat(action.type, action.power));
+        if (Heat == MaxHeat)
+        {
+            isOverheat = true;
+            overheatCounter = 0;
         }
     }
 
@@ -99,9 +134,23 @@ public class GUIScript : MonoBehaviour
 
         switch (type)
         {
-            case ActionType.Block: return (new List<int>() { 3, 4, 5 })[power];
-            case ActionType.Delay: return (new List<int>() { 4, 5, 6 })[power];
-            case ActionType.Suggest: return (new List<int>() { 5, 6, 7 })[power];
+            case ActionType.DangerZone: return (new List<int>() { 3, 4, 5 })[power];
+            case ActionType.SecurityCheck: return (new List<int>() { 4, 5, 6 })[power];
+            case ActionType.Detour: return (new List<int>() { 5, 6, 7 })[power];
+        }
+
+        return 0;
+    }
+    
+    int GetActionHeat(ActionType type, int power)
+    {
+        if (power == 0) return 0;
+
+        switch (type)
+        {
+            case ActionType.DangerZone: return (new List<int>() { 3, 4, 5 })[power - 1];
+            case ActionType.SecurityCheck: return (new List<int>() { 4, 5, 6 })[power - 1];
+            case ActionType.Detour: return (new List<int>() { 5, 6, 7 })[power - 1];
         }
 
         return 0;
