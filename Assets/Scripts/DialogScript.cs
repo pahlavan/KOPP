@@ -28,7 +28,7 @@ public class DialogScript : MonoBehaviour
     {
         panel = gameObject.transform.Find("Panel").GetComponent<Image>();
         textbox = gameObject.transform.Find("Panel/Text").GetComponent<Text>();
-        showNewMessage(DialogSource.Humen, "We are inbound. Please help us with navigation throught the galaxy...");
+        showNewMessage(DialogSource.Humen, "We are inbound. Please help us with navigation...");
     }
 
     // Update is called once per frame
@@ -43,6 +43,12 @@ public class DialogScript : MonoBehaviour
             }
         }
 
+        if (Time.time - startTime > 10)
+        {
+            panel.enabled = false;
+            textbox.enabled = false;
+        }
+
         textbox.text = messageState;
     }
 
@@ -51,6 +57,8 @@ public class DialogScript : MonoBehaviour
         startTime = Time.time;
         message = msg;
         messageState = "";
+        panel.enabled = true;
+        textbox.enabled = true;
 
         switch (source)
         {
