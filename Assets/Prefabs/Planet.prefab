@@ -462,6 +462,7 @@ MonoBehaviour:
   - {fileID: 6299549620563083408}
   - {fileID: 8321639108997874518}
   menuAnimationDuration: 0.3
+  planetState: 0
 --- !u!58 &58591344302793610
 CircleCollider2D:
   m_ObjectHideFlags: 0

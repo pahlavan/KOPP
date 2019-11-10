@@ -127,19 +127,11 @@ public class PlanetScript : MonoBehaviour
         gameObject.GetComponent<CircleCollider2D>().radius = originalColliderRadius;
     }
 
-    void CheckSelection()
+    void EnableMenuActions(bool state)
     {
-        if(isSelected)
+        foreach(var button in UIButtons)
         {
-            selectionTime--;
-            if (selectionTime <= 0)
-            {
-                isSelected = false;
-            }
-        }
-        else
-        {
-            selectionTime = 50;
+            button.interactable = state;
         }
     }
 
@@ -184,6 +176,7 @@ public class PlanetScript : MonoBehaviour
             {
                 planetState = PlanetState.Available;
                 spriteRenderer.color = Color.white;
+                EnableMenuActions(true);
             }
         }
     }
@@ -252,6 +245,7 @@ public class PlanetScript : MonoBehaviour
         planetState = PlanetState.DangerZone;
         planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.DangerZone);
         spriteRenderer.color = Color.green;
+        EnableMenuActions(false);
     }
 
     public void DetourAction()
@@ -261,6 +255,7 @@ public class PlanetScript : MonoBehaviour
         planetState = PlanetState.Detour;
         planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.Detour);
         spriteRenderer.color = Color.blue;
+        EnableMenuActions(false);
     }
 
     public void SecurityCheckAction()
@@ -270,6 +265,7 @@ public class PlanetScript : MonoBehaviour
         planetState = PlanetState.SecurityCheck;
         planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.SecurityCheck);
         spriteRenderer.color = Color.red;
+        EnableMenuActions(false);
     }
 
     public void OnMouseExit()
