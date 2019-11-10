@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialPlanet: {fileID: 0}
   FuelBar: {fileID: 247615158400001339}
-  MaxFuel: 110
+  MaxFuel: 100
   ShipVelocity: 1
   ShipBody: {fileID: 3193649940253431257}
 --- !u!1001 &2811789506413861841
@@ -212,6 +212,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.36085
       objectReference: {fileID: 0}
+    - target: {fileID: 817231928115738738, guid: 6a26fe253dbeb0b4283eff07ee721c86,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 817231927344790112, guid: 6a26fe253dbeb0b4283eff07ee721c86,
         type: 3}
       propertyPath: m_Sprite
@@ -219,11 +224,6 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 421822b678831fe489a7685993761f9e,
         type: 3}
     - target: {fileID: 817231927364523710, guid: 6a26fe253dbeb0b4283eff07ee721c86,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 817231928115738738, guid: 6a26fe253dbeb0b4283eff07ee721c86,
         type: 3}
       propertyPath: m_Enabled
       value: 0
