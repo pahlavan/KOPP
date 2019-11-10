@@ -47,11 +47,6 @@ public class PlanetScript : MonoBehaviour
         isSelected = true;
     }
 
-    private void OnMouseDown()
-    {
-        SelectPlanet();
-    }
-
     void MoveMenuButtons(int step)
     {
         if (step < 0 || step > menuTotalSteps) { throw new ArgumentException(nameof(step)); }
@@ -212,9 +207,22 @@ public class PlanetScript : MonoBehaviour
         ShowActionMenu();
     }
 
-    public void TestButton1()
+    public void DangerZoneAction()
     {
-        Debug.Log("button 1");
+        Debug.Log("DangerZoneAction");
+        CollapseMenu();
+    }
+
+    public void DetourAction()
+    {
+        Debug.Log("DetourAction");
+        CollapseMenu();
+    }
+
+    public void SecurityCheckAction()
+    {
+        Debug.Log("SecurityCheckAction");
+        CollapseMenu();
     }
 
     public void OnMouseExit()
