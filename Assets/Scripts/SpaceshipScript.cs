@@ -91,7 +91,7 @@ public class SpaceshipScript : MonoBehaviour
 
             if (transform.position == nextHop.transform.position)
             {
-                fuel = Math.Max(MaxFuel, 150);
+                fuel = Math.Min(MaxFuel, fuel + 100);
 
                 if (nextHop.GetComponent<PlanetScript>().planetState != PlanetState.SecurityCheck)
                 {

@@ -128,7 +128,7 @@ MonoBehaviour:
   InitialPlanet: {fileID: 0}
   FuelBar: {fileID: 247615158400001339}
   MaxFuel: 100
-  ShipVelocity: 1
+  ShipVelocity: 0.8
   ShipBody: {fileID: 3193649940253431257}
 --- !u!1001 &2811789506413861841
 PrefabInstance:
