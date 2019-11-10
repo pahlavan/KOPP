@@ -3,15 +3,40 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Experimental.U2D;
+using UnityEditorInternal;
+using System;
+using UnityEditor;
 
 public class PlanetScript : MonoBehaviour
 {
     public List<GameObject> OutgoingPlanets;
-    public Text text;
     public bool isSelected = false;
+    public List<Button> UIButtons;
+    public float menuAnimationDuration;
+    public PlanetState planetState;
 
+    public static IList<string> EnabledActions = new List<string>();
+    public static PlanetActionDurations ActionDurations =
+        new PlanetActionDurations
+        {
+            DangerZone = 2,
+            Detour = 3,
+            SecurityCheck = 4,
+        };
+
+    private MenuState menuState;
     private int selectionTime = 0;
     private SpriteRenderer spriteRenderer;
+    private int menuTransitionStep;
+    private int menuTotalSteps;
+    private float menuRadius;
+    private int menuDegreeOffset;
+    private List<Button> activeButtons;
+    private float originalColliderRadius;
+    private float menuColliderRadius;
+
+    private int totalPlanetStateSteps;
+    private int planetTransitionStep;
 
     void DrawLine(Vector3 start, Vector3 end, Color color)
     {
@@ -31,24 +56,128 @@ public class PlanetScript : MonoBehaviour
 
     public void SelectPlanet()
     {
-        //selectionTime = 100000;
-        isSelected = !isSelected;
+        isSelected = true;
     }
 
-    void CheckSelection()
+    void MoveMenuButtons(int step)
     {
-        //text.text = selectionTime.ToString();
-        if(isSelected)
+        if (step < 0 || step > menuTotalSteps) { throw new ArgumentException(nameof(step)); }
+
+        int percent = step * 100 / menuTotalSteps;
+
+        int i = 0;
+        foreach (Button action in activeButtons)
         {
-            selectionTime--;
-            if (selectionTime <= 0)
+            var vec = Quaternion.Euler(0, 0, menuDegreeOffset * i++) * new Vector3(0, menuRadius * percent / 100, 0);
+            action.transform.localPosition = vec;
+        }
+    }
+
+    public void ShowActionMenu()
+    {
+        switch (EnabledActions.Count)
+        {
+            case 0:
+                EnabledActions.Add(UIButtons[0].name);
+                break;
+            case 1:
+                EnabledActions.Add(UIButtons[1].name);
+                break;
+            case 2:
+                EnabledActions.Add(UIButtons[2].name);
+                break;
+            default:
+                break;
+        }
+
+        gameObject.GetComponent<CircleCollider2D>().radius = menuColliderRadius;
+
+        switch (menuState)
+        {
+            case MenuState.Collapsing:
+                menuTransitionStep = menuTotalSteps - menuTransitionStep;
+                menuState = MenuState.Respawning;
+                break;
+            case MenuState.Respawning:
+                break;
+            case MenuState.Active:
+                break;
+            case MenuState.Disable:
+                menuTransitionStep = menuTotalSteps;
+                menuState = MenuState.Respawning;
+                break;
+        }
+
+        activeButtons = new List<Button>();
+        foreach(var button in UIButtons)
+        {
+            if (EnabledActions.Contains(button.name))
             {
-                isSelected = false;
+                activeButtons.Add(button);
             }
         }
-        else
+
+        menuDegreeOffset = 360 / activeButtons.Count;
+    }
+
+    public void CollapseMenu()
+    {
+        menuState = MenuState.Collapsing;
+        menuTransitionStep = menuTotalSteps;
+        gameObject.GetComponent<CircleCollider2D>().radius = originalColliderRadius;
+    }
+
+    void EnableMenuActions(bool state)
+    {
+        foreach(var button in UIButtons)
         {
-            selectionTime = 50;
+            button.interactable = state;
+        }
+    }
+
+    void AnimateMenu()
+    {
+        if (menuTransitionStep > 0)
+        {
+            menuTransitionStep--;
+
+            switch (menuState)
+            {
+                case MenuState.Respawning:
+                    MoveMenuButtons(menuTotalSteps - menuTransitionStep);
+                    break;
+                case MenuState.Collapsing:
+                    MoveMenuButtons(menuTransitionStep);
+                    break;
+            }
+
+            if (menuTransitionStep <= 0)
+            {
+                switch (menuState)
+                {
+                    case MenuState.Respawning:
+                        menuState = MenuState.Active;
+                        break;
+                    case MenuState.Collapsing:
+                        menuState = MenuState.Disable;
+                        break;
+                }
+            }
+        }
+    }
+
+    void AnimatePlanet()
+    {
+        if (planetTransitionStep > 0)
+        {
+            planetTransitionStep--;
+
+            if (planetTransitionStep == 0)
+            {
+                planetState = PlanetState.Available;
+                spriteRenderer.color = Color.white;
+                EnableMenuActions(true);
+            }
         }
     }
 
@@ -61,11 +190,19 @@ public class PlanetScript : MonoBehaviour
         }
 
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        menuTotalSteps = CalculateStepCount(menuAnimationDuration);
+        menuTransitionStep = 0;
+        menuRadius = spriteRenderer.bounds.size.x * 0.7f;
+        menuState = MenuState.Disable;
+        originalColliderRadius = gameObject.GetComponent<CircleCollider2D>().radius;
+        menuColliderRadius = originalColliderRadius * 2.2f;
+
+        planetState = PlanetState.Available;
     }
     
     void Update()
     {
-        CheckSelection();
+        /*CheckSelection();
 
         if (isSelected)
         {
@@ -74,20 +211,88 @@ public class PlanetScript : MonoBehaviour
         else
         {
             spriteRenderer.color = Color.white;
-        }
+        }*/
+    }
+
+    int CalculateStepCount(float duration)
+    {
+        return (int)(duration / Time.fixedDeltaTime);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    isSelected = true;
-        //}
+        if (menuState != MenuState.Active && menuState != MenuState.Disable)
+        {
+            AnimateMenu();
+        }
+
+        if (planetState != PlanetState.Available)
+        {
+            AnimatePlanet();
+        }
     }
 
-    void OnMouseDown()
+    public void OnMouseEnter()
     {
-        isSelected = !isSelected;
+        ShowActionMenu();
     }
+
+    public void DangerZoneAction()
+    {
+        Debug.Log("DangerZoneAction");
+        CollapseMenu();
+        planetState = PlanetState.DangerZone;
+        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.DangerZone);
+        spriteRenderer.color = Color.green;
+        EnableMenuActions(false);
+    }
+
+    public void DetourAction()
+    {
+        Debug.Log("DetourAction");
+        CollapseMenu();
+        planetState = PlanetState.Detour;
+        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.Detour);
+        spriteRenderer.color = Color.blue;
+        EnableMenuActions(false);
+    }
+
+    public void SecurityCheckAction()
+    {
+        Debug.Log("SecurityCheckAction");
+        CollapseMenu();
+        planetState = PlanetState.SecurityCheck;
+        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.SecurityCheck);
+        spriteRenderer.color = Color.red;
+        EnableMenuActions(false);
+    }
+
+    public void OnMouseExit()
+    {
+        CollapseMenu();
+    }
+
+    enum MenuState
+    {
+        Respawning,
+        Active,
+        Collapsing,
+        Disable,
+    }
+}
+
+public enum PlanetState
+{
+    Available,
+    DangerZone,
+    Detour,
+    SecurityCheck,
+}
+
+public class PlanetActionDurations
+{
+    public float DangerZone;
+    public float Detour;
+    public float SecurityCheck;
 }

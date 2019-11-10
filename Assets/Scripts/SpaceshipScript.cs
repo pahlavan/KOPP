@@ -8,29 +8,15 @@ public class SpaceshipScript : MonoBehaviour
 {
     public GameObject InitialPlanet;
     public float Speed = (float)0.1;
-    public Text text;
     public GameObject FuelBar;
+    public int MaxFuel;
 
     private bool inFlight = true;
     private bool isInitialized = false;
-    private int distance = 0;
+    private int fuel = 0;
 
     private GameObject nextHop;
     private GameObject lastHop;
-
-    //void DrawQuad(Rect position, Color color)
-    //{
-    //    Texture2D texture = new Texture2D(1, 1);
-    //    texture.SetPixel(0, 0, color);
-    //    texture.Apply();
-    //    GUI.skin.box.normal.background = texture;
-    //    GUI.Box(position, GUIContent.none);
-    //}
-
-    //void OnGUI()
-    //{
-    //    DrawQuad(new Rect(transform.position.x, transform.position.y + 50, 100, 10), Color.white);
-    //}
 
     void SelectNextHop()
     {
@@ -44,6 +30,15 @@ public class SpaceshipScript : MonoBehaviour
         }
         else
         {
+            foreach(var planet in options)
+            {
+                if (planet.GetComponent<PlanetScript>().planetState == PlanetState.Detour)
+                {
+                    nextHop = planet;
+                    return;
+                }
+            }
+
             nextHop = options[Random.Range(0, cnt)];
         }
     }
@@ -51,9 +46,7 @@ public class SpaceshipScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //var fuelBar = new GameObject();
-        //var shape = fuelBar.AddComponent<SpriteShapeRenderer>();
-        //shape.bounds = new Bounds(transform.position, GetComponent<SpriteRenderer>().bounds.size);
+        fuel = MaxFuel;
     }
 
     // Update is called once per frame
@@ -69,27 +62,28 @@ public class SpaceshipScript : MonoBehaviour
 
         if (inFlight)
         {
-            if (nextHop.GetComponent<PlanetScript>().isSelected)
+            if (nextHop.GetComponent<PlanetScript>().planetState == PlanetState.DangerZone)
             {
                 nextHop = lastHop;
             }
 
             transform.position = Vector3.MoveTowards(transform.position, nextHop.transform.position, Speed * 5);
-            distance++;
+            fuel--;
 
-            FuelBar.transform.localScale = new Vector3((float)(3.424 * (110 - distance) / 110.0), 0.639f, 1);
+            FuelBar.transform.localScale = new Vector3((float)(3.424 * fuel / MaxFuel), 0.639f, 1);
 
             if (transform.position == nextHop.transform.position)
             {
-                if (!nextHop.GetComponent<PlanetScript>().isSelected)
+                fuel = MaxFuel;
+
+                if (nextHop.GetComponent<PlanetScript>().planetState != PlanetState.SecurityCheck)
                 {
-                    distance = 0;
+                    SelectNextHop();
                 }
-                SelectNextHop();
             }
         }
 
-        if (distance > 110 || !inFlight)
+        if (fuel <= 0 || !inFlight)
         {
             Destroy(gameObject);
         }
