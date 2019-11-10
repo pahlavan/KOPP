@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public enum ActionType
 {
@@ -36,8 +37,8 @@ public class GUIScript : MonoBehaviour
 
     private List<Action> actions = new List<Action>(){
         new Action() { type = ActionType.DangerZone, power = 1 },
-        new Action() { type = ActionType.SecurityCheck, power = 0 },
         new Action() { type = ActionType.Detour, power = 0 },
+        new Action() { type = ActionType.SecurityCheck, power = 0 },
     };
 
     private int timer = 0;
@@ -126,6 +127,11 @@ public class GUIScript : MonoBehaviour
             isOverheat = true;
             overheatCounter = 0;
         }
+    }
+
+    public List<ActionType> GetEnabledActions()
+    {
+        return actions.FindAll(a => a.power > 0).Select(a => a.type).ToList();
     }
 
     int GetUpgradeCost(ActionType type, int power)
