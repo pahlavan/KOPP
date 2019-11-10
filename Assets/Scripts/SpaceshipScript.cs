@@ -76,7 +76,6 @@ public class SpaceshipScript : MonoBehaviour
 
             transform.position = Vector3.MoveTowards(transform.position, nextHop.transform.position, Speed * 5);
             distance++;
-            text.text = distance.ToString();
 
             FuelBar.transform.localScale = new Vector3((float)(3.424 * (110 - distance) / 110.0), 0.639f, 1);
 
