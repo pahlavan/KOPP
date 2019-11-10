@@ -16,13 +16,11 @@ public class MainScript : MonoBehaviour
         var newShip = Instantiate(spaceshipPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         var shipScript = newShip.GetComponent<SpaceshipScript>();
         shipScript.InitialPlanet = initialPlanet;
-        shipScript.text = text;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        // createNewShip();
     }
 
     // Update is called once per frame

@@ -12,8 +12,17 @@ public class PlanetScript : MonoBehaviour
     public List<GameObject> OutgoingPlanets;
     public bool isSelected = false;
     public List<Button> UIButtons;
-    public static IList<string> EnabledActions = new List<string>();
     public float menuAnimationDuration;
+    public PlanetState planetState;
+
+    public static IList<string> EnabledActions = new List<string>();
+    public static PlanetActionDurations ActionDurations =
+        new PlanetActionDurations
+        {
+            DangerZone = 2,
+            Detour = 3,
+            SecurityCheck = 4,
+        };
 
     private MenuState menuState;
     private int selectionTime = 0;
@@ -25,6 +34,9 @@ public class PlanetScript : MonoBehaviour
     private List<Button> activeButtons;
     private float originalColliderRadius;
     private float menuColliderRadius;
+
+    private int totalPlanetStateSteps;
+    private int planetTransitionStep;
 
     void DrawLine(Vector3 start, Vector3 end, Color color)
     {
@@ -162,6 +174,20 @@ public class PlanetScript : MonoBehaviour
         }
     }
 
+    void AnimatePlanet()
+    {
+        if (planetTransitionStep > 0)
+        {
+            planetTransitionStep--;
+
+            if (planetTransitionStep == 0)
+            {
+                planetState = PlanetState.Available;
+                spriteRenderer.color = Color.white;
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -171,17 +197,19 @@ public class PlanetScript : MonoBehaviour
         }
 
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        menuTotalSteps = (int)(menuAnimationDuration / Time.fixedDeltaTime);
+        menuTotalSteps = CalculateStepCount(menuAnimationDuration);
         menuTransitionStep = 0;
         menuRadius = spriteRenderer.bounds.size.x * 0.7f;
         menuState = MenuState.Disable;
         originalColliderRadius = gameObject.GetComponent<CircleCollider2D>().radius;
         menuColliderRadius = originalColliderRadius * 2.2f;
+
+        planetState = PlanetState.Available;
     }
     
     void Update()
     {
-        CheckSelection();
+        /*CheckSelection();
 
         if (isSelected)
         {
@@ -190,7 +218,12 @@ public class PlanetScript : MonoBehaviour
         else
         {
             spriteRenderer.color = Color.white;
-        }
+        }*/
+    }
+
+    int CalculateStepCount(float duration)
+    {
+        return (int)(duration / Time.fixedDeltaTime);
     }
 
     // Update is called once per frame
@@ -199,6 +232,11 @@ public class PlanetScript : MonoBehaviour
         if (menuState != MenuState.Active && menuState != MenuState.Disable)
         {
             AnimateMenu();
+        }
+
+        if (planetState != PlanetState.Available)
+        {
+            AnimatePlanet();
         }
     }
 
@@ -211,18 +249,27 @@ public class PlanetScript : MonoBehaviour
     {
         Debug.Log("DangerZoneAction");
         CollapseMenu();
+        planetState = PlanetState.DangerZone;
+        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.DangerZone);
+        spriteRenderer.color = Color.green;
     }
 
     public void DetourAction()
     {
         Debug.Log("DetourAction");
         CollapseMenu();
+        planetState = PlanetState.Detour;
+        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.Detour);
+        spriteRenderer.color = Color.blue;
     }
 
     public void SecurityCheckAction()
     {
         Debug.Log("SecurityCheckAction");
         CollapseMenu();
+        planetState = PlanetState.SecurityCheck;
+        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.SecurityCheck);
+        spriteRenderer.color = Color.red;
     }
 
     public void OnMouseExit()
@@ -237,4 +284,19 @@ public class PlanetScript : MonoBehaviour
         Collapsing,
         Disable,
     }
+}
+
+public enum PlanetState
+{
+    Available,
+    DangerZone,
+    Detour,
+    SecurityCheck,
+}
+
+public class PlanetActionDurations
+{
+    public float DangerZone;
+    public float Detour;
+    public float SecurityCheck;
 }
