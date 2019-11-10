@@ -24,8 +24,13 @@ public class SpaceshipScript : MonoBehaviour
     void SelectNextHop()
     {
         lastHop = nextHop;
-        var options = nextHop.GetComponent<PlanetScript>().OutgoingPlanets;
-        int cnt = options.Count;
+        var nextHopScript = nextHop.GetComponent<PlanetScript>();
+        var forwardOption = nextHopScript.OutgoingPlanets;
+        var detour = new List<GameObject>();
+        detour.AddRange(nextHopScript.incomingPlanets);
+        detour.AddRange(forwardOption);
+
+        int cnt = forwardOption.Count;
 
         if (cnt == 0)
         {
@@ -34,7 +39,7 @@ public class SpaceshipScript : MonoBehaviour
         }
         else
         {
-            foreach(var planet in options)
+            foreach(var planet in detour)
             {
                 if (planet.GetComponent<PlanetScript>().planetState == PlanetState.Detour)
                 {

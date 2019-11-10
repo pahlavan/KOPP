@@ -18,6 +18,7 @@ public class PlanetScript : MonoBehaviour
     public GameObject CooldownAnimation;
     public Material pathMaterial;
     public Color pathColor;
+    public List<GameObject> incomingPlanets;
 
     private MenuState menuState;
     private SpriteRenderer spriteRenderer;
@@ -194,6 +195,16 @@ public class PlanetScript : MonoBehaviour
         foreach(var button in UIButtons)
         {
             actionCooldown[button.name] = -1;
+        }
+
+        if (incomingPlanets == null) incomingPlanets = new List<GameObject>();
+
+        foreach(var planet in OutgoingPlanets)
+        {
+            var script = planet.GetComponent<PlanetScript>();
+            if (script.incomingPlanets == null) script.incomingPlanets = new List<GameObject>();
+
+            script.incomingPlanets.Add(gameObject);
         }
     }
     
