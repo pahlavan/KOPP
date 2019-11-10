@@ -51,6 +51,9 @@ TagManager:
   - name: Spaceship
     uniqueID: 3174907895
     locked: 0
+  - name: PanelBG
+    uniqueID: 1681150425
+    locked: 0
   - name: Panel
     uniqueID: 2645717905
     locked: 0

@@ -17,14 +17,6 @@ public class PlanetScript : MonoBehaviour
     public PlanetState planetState;
     public GameObject CooldownAnimation;
 
-    public static PlanetActionDurations ActionDurations =
-        new PlanetActionDurations
-        {
-            DangerZone = 2,
-            Detour = 3,
-            SecurityCheck = 4,
-        };
-
     private MenuState menuState;
     private SpriteRenderer spriteRenderer;
     private int menuTransitionStep;
@@ -262,8 +254,8 @@ public class PlanetScript : MonoBehaviour
         if (activeAction != null) return;
 
         planetState = PlanetState.DangerZone;
-        guiScript.OnActionPerformed(ActionType.DangerZone);
-        PrepareActionExecution(ActionDurations.DangerZone, "DangerZone");
+        int duration = guiScript.OnActionPerform(ActionType.DangerZone);
+        PrepareActionExecution(duration, "DangerZone");
     }
 
     public void DetourAction()
@@ -271,8 +263,8 @@ public class PlanetScript : MonoBehaviour
         if (activeAction != null) return;
         
         planetState = PlanetState.Detour;
-        guiScript.OnActionPerformed(ActionType.Detour);
-        PrepareActionExecution(ActionDurations.DangerZone, "Detour");
+        int duration = guiScript.OnActionPerform(ActionType.Detour);
+        PrepareActionExecution(duration, "Detour");
     }
 
     public void SecurityCheckAction()
@@ -280,8 +272,8 @@ public class PlanetScript : MonoBehaviour
         if (activeAction != null) return;
         
         planetState = PlanetState.SecurityCheck;
-        guiScript.OnActionPerformed(ActionType.SecurityCheck);
-        PrepareActionExecution(ActionDurations.DangerZone, "SecurityCheck");
+        int duration = guiScript.OnActionPerform(ActionType.SecurityCheck);
+        PrepareActionExecution(duration, "SecurityCheck");
     }
 
     public void OnMouseExit()
@@ -309,11 +301,4 @@ public enum PlanetState
     DangerZone,
     Detour,
     SecurityCheck,
-}
-
-public class PlanetActionDurations
-{
-    public float DangerZone;
-    public float Detour;
-    public float SecurityCheck;
 }

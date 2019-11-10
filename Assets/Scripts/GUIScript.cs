@@ -46,7 +46,7 @@ public class GUIScript : MonoBehaviour
         new Action() { type = ActionType.SecurityCheck, power = 0 },
     };
 
-    private int timer = 0;
+    private float incomeTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +63,7 @@ public class GUIScript : MonoBehaviour
         gauges = GameObject.FindGameObjectsWithTag("Gauge");
         damageIcons = GameObject.FindGameObjectsWithTag("DamageIcon");
         dialog = GameObject.Find("DialogCanvas").GetComponent<DialogScript>();
+        incomeTime = Time.time;
     }
 
     void FixedUpdate()
@@ -80,10 +81,21 @@ public class GUIScript : MonoBehaviour
         }
     }
 
+    float GetIncomeDelay()
+    {
+        // start with every 5s with max penalty of 10 
+        float penalty = (Heat / MaxHeat) * 10;
+        return 5 + penalty;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (timer++ % 100 == 0) Points++;
+        if (Time.time - incomeTime > GetIncomeDelay())
+        {
+            Points++;
+            incomeTime = Time.time;
+        }
 
         GameObject.Find("PointsText").GetComponent<Text>().text = "Points: " + Points;
         TimeSpan timeSpan = TimeSpan.FromSeconds(Time.time - startTime);
@@ -134,9 +146,9 @@ public class GUIScript : MonoBehaviour
         }
     }
 
-    public void OnActionPerformed(ActionType type)
+    public int OnActionPerform(ActionType type)
     {
-        if (isOverheat) return;
+        if (isOverheat) return 0;
 
         var action = actions.Find(a => a.type == type);
         float prevHeat = Heat;
@@ -144,13 +156,15 @@ public class GUIScript : MonoBehaviour
         if (Heat == MaxHeat)
         {
             isOverheat = true;
-            dialog.showNewMessage(DialogSource.Commander, "Enough. Don't touch the system. Let's see what's going on!");
+            dialog.showNewMessage(DialogSource.Commander, "Enough! Don't touch the system. Let's see what's going on!");
         }
 
         if (Heat > prevHeat && ((Heat / MaxHeat) > 0.65) && ((prevHeat / MaxHeat) < 0.65))
         {
             dialog.showNewMessage(DialogSource.Commander, "What's up with all the alerts? This is not normal...");
         }
+
+        return GetActionDuration(type);
     }
 
     public List<ActionType> GetEnabledActions()
@@ -164,9 +178,9 @@ public class GUIScript : MonoBehaviour
 
         switch (type)
         {
-            case ActionType.DangerZone: return (new List<int>() { 3, 4, 5 })[power];
-            case ActionType.SecurityCheck: return (new List<int>() { 4, 5, 6 })[power];
-            case ActionType.Detour: return (new List<int>() { 5, 6, 7 })[power];
+            case ActionType.DangerZone: return (new List<int>() { 3, 4, 6 })[power];
+            case ActionType.SecurityCheck: return (new List<int>() { 3, 5, 6 })[power];
+            case ActionType.Detour: return (new List<int>() { 3, 6, 7 })[power];
         }
 
         return 0;
@@ -181,6 +195,31 @@ public class GUIScript : MonoBehaviour
             case ActionType.DangerZone: return (new List<int>() { 3, 4, 5 })[power - 1];
             case ActionType.SecurityCheck: return (new List<int>() { 4, 5, 6 })[power - 1];
             case ActionType.Detour: return (new List<int>() { 5, 6, 7 })[power - 1];
+        }
+
+        return 0;
+    }
+
+    public int GetActionDuration(ActionType type, int power)
+    {
+        if (power < 0 || power > MaxPower) return 0;
+
+        switch (type)
+        {
+            case ActionType.DangerZone: return (new List<int>() { 5, 8, 12 })[power];
+            case ActionType.SecurityCheck: return (new List<int>() { 5, 8, 12 })[power];
+            case ActionType.Detour: return (new List<int>() { 5, 8, 12 })[power];
+        }
+
+        return 0;
+    }
+
+    public int GetActionDuration(ActionType type)
+    {
+        var action = actions.Find(a => a.type == type);
+        if (action != null)
+        {
+            return GetActionDuration(type, action.power);
         }
 
         return 0;
