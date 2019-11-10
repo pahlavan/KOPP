@@ -67,7 +67,7 @@ public class SpaceshipScript : MonoBehaviour
                 nextHop = lastHop;
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, nextHop.transform.position, Speed * 5);
+            transform.position = Vector3.MoveTowards(transform.position, nextHop.transform.position, Speed);
             fuel--;
 
             FuelBar.transform.localScale = new Vector3((float)(3.424 * fuel / MaxFuel), 0.639f, 1);

@@ -127,9 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialPlanet: {fileID: 0}
   Speed: 0.1
-  text: {fileID: 0}
   FuelBar: {fileID: 247615158400001339}
-  MaxFuel: 110
+  MaxFuel: 300
 --- !u!1001 &2811789506413861841
 PrefabInstance:
   m_ObjectHideFlags: 0

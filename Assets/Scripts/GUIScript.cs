@@ -29,11 +29,11 @@ public class GUIScript : MonoBehaviour
     public List<Sprite> randomDialSprites;
 
     public static readonly int MaxPower = 3;
-    public static readonly int MaxHeat = 20;
-    public static readonly int OverheatCooldown = 10;
+    public static readonly int OverheatCooldown = 25;
+    public static readonly float MaxHeat = 20;
 
     private List<List<Sprite>> sprites;
-    private int overheatCounter = 0;
+    private SpriteRenderer bossHologram;
 
     private List<Action> actions = new List<Action>(){
         new Action() { type = ActionType.DangerZone, power = 1 },
@@ -52,11 +52,18 @@ public class GUIScript : MonoBehaviour
             detourDialSprites,
             randomDialSprites,
         };
+
+        bossHologram = GameObject.Find("BossHologram").GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
     {
-        Heat = Math.Max(0, Heat - MaxHeat / ((float)OverheatCooldown / Time.fixedDeltaTime));
+        float delta = MaxHeat / ((float)OverheatCooldown / Time.fixedDeltaTime);
+        if (isOverheat)
+            delta *= 3;
+
+        Heat = Math.Max(0, Heat - delta);
+        bossHologram.enabled = (Heat / MaxHeat) > 0.7;
         
         if (isOverheat && Heat == 0)
         {
@@ -129,7 +136,6 @@ public class GUIScript : MonoBehaviour
         if (Heat == MaxHeat)
         {
             isOverheat = true;
-            overheatCounter = 0;
         }
     }
 
