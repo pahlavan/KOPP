@@ -39,6 +39,7 @@ public class PlanetScript : MonoBehaviour
     private int totalPlanetStateSteps;
     private int planetTransitionStep;
     private Animator planetAnimator;
+    private float planetStateTransitionTime;
 
     void DrawLine(Vector3 start, Vector3 end, Color color)
     {
@@ -153,11 +154,13 @@ public class PlanetScript : MonoBehaviour
     {
         if (planetTransitionStep > 0)
         {
-            planetTransitionStep--;
+            //planetTransitionStep--;
 
-            if (planetTransitionStep == 0)
+            //if (planetTransitionStep == 0)
+            if (Time.time >= planetStateTransitionTime)
             {
                 planetState = PlanetState.Available;
+                CooldownAnimation.SetActive(false);
                 spriteRenderer.color = Color.white;
             }
         }
@@ -204,12 +207,6 @@ public class PlanetScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        /*if (planetAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
-        {
-            //print(planetaniGetCurrentAnimatorStateInfo(0).name)
-            CooldownAnimation.SetActive(false);
-        }*/
-
         if (menuState != MenuState.Active && menuState != MenuState.Disable)
         {
             AnimateMenu();
@@ -228,42 +225,41 @@ public class PlanetScript : MonoBehaviour
 
     void TriggerTimerAnimation(float duration)
     {
-        //CooldownAnimation.SetActive(true);
-        //planetAnimator.speed = 1f / duration;
-        //planetAnimator.Play("Cooldown");
+        CooldownAnimation.SetActive(true);
+        planetAnimator.speed = 1f / duration;
+        planetAnimator.Play("Cooldown");
+    }
+
+    void PrepareActionExecution(float duration)
+    {
+        CollapseMenu();
+        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(duration);
+        TriggerTimerAnimation(duration);
+        planetStateTransitionTime = Time.time + duration;
     }
 
     public void DangerZoneAction()
     {
-        Debug.Log("DangerZoneAction");
-        CollapseMenu();
         planetState = PlanetState.DangerZone;
-        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.DangerZone);
         spriteRenderer.color = Color.green;
         guiScript.OnActionPerformed(ActionType.DangerZone);
-        TriggerTimerAnimation(ActionDurations.DangerZone);
+        PrepareActionExecution(ActionDurations.DangerZone);
     }
 
     public void DetourAction()
     {
-        Debug.Log("DetourAction");
-        CollapseMenu();
         planetState = PlanetState.Detour;
-        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.Detour);
         spriteRenderer.color = Color.blue;
         guiScript.OnActionPerformed(ActionType.Detour);
-        TriggerTimerAnimation(ActionDurations.Detour);
+        PrepareActionExecution(ActionDurations.DangerZone);
     }
 
     public void SecurityCheckAction()
     {
-        Debug.Log("SecurityCheckAction");
-        CollapseMenu();
         planetState = PlanetState.SecurityCheck;
-        planetTransitionStep = totalPlanetStateSteps = CalculateStepCount(ActionDurations.SecurityCheck);
         spriteRenderer.color = Color.red;
         guiScript.OnActionPerformed(ActionType.SecurityCheck);
-        TriggerTimerAnimation(ActionDurations.SecurityCheck);
+        PrepareActionExecution(ActionDurations.DangerZone);
     }
 
     public void OnMouseExit()
