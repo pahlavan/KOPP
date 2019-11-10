@@ -95,8 +95,9 @@ public class GUIScript : MonoBehaviour
             var mainGaugeImage = gauges[i].GetComponent<Image>();
             mainGaugeImage.sprite = sprites[i][action.power];
 
-            //var upgradeImage = gauges[i].transform.Find("upgrade").GetComponent<Image>();
-            //upgradeImage.color = CanUpgrade(action) ? Color.green : Color.red;
+            var upgradeImage = gauges[i].transform.Find("Panel").GetComponent<Image>();
+            upgradeImage.color = CanUpgrade(action) ? Color.green : Color.red;
+            upgradeImage.enabled = action.power < MaxPower;
 
             var upgradeText = gauges[i].transform.Find("UpgradeText").GetComponent<Text>();
             int cost = GetUpgradeCost(action.type, action.power);
