@@ -36,6 +36,7 @@ public class GUIScript : MonoBehaviour
 
     private List<List<Sprite>> sprites;
     private SpriteRenderer bossHologram;
+    private SpriteRenderer humanHologram;
     private GameObject[] gauges;
     private GameObject[] damageIcons;
     private DialogScript dialog;
@@ -62,6 +63,7 @@ public class GUIScript : MonoBehaviour
         };
 
         bossHologram = GameObject.Find("BossHologram").GetComponent<SpriteRenderer>();
+        humanHologram = GameObject.Find("HumanHologram").GetComponent<SpriteRenderer>();
         gauges = GameObject.FindGameObjectsWithTag("Gauge");
         damageIcons = GameObject.FindGameObjectsWithTag("DamageIcon");
         dialog = GameObject.Find("DialogCanvas").GetComponent<DialogScript>();
@@ -76,7 +78,7 @@ public class GUIScript : MonoBehaviour
 
         Heat = Math.Max(0, Heat - delta);
         bossHologram.enabled = isOverheat || ((Heat / MaxHeat) > 0.65);
-        
+
         if (isOverheat && Heat == 0)
         {
             isOverheat = false;

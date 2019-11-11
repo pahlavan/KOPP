@@ -18,6 +18,7 @@ public class DialogScript : MonoBehaviour
 
     private Text textbox;
     private Image panel;
+    private SpriteRenderer humanHologram;
 
     public Color AIColor;
     public Color HumenColor;
@@ -28,7 +29,9 @@ public class DialogScript : MonoBehaviour
     {
         panel = gameObject.transform.Find("Panel").GetComponent<Image>();
         textbox = gameObject.transform.Find("Panel/Text").GetComponent<Text>();
+        humanHologram = GameObject.Find("HumanHologram").GetComponent<SpriteRenderer>();
         showNewMessage(DialogSource.Humen, "We are inbound. Please help us with navigation...");
+        humanHologram.enabled = true;
     }
 
     // Update is called once per frame
@@ -47,6 +50,7 @@ public class DialogScript : MonoBehaviour
         {
             panel.enabled = false;
             textbox.enabled = false;
+            humanHologram.enabled = false;
         }
 
         textbox.text = messageState;
