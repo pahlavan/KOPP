@@ -18,6 +18,7 @@ public class WaveGeneratorScript : MonoBehaviour
     public GameObject InitialPlanet;
 
     private IDictionary<string, GameObject> spaceShips;
+    private GUIScript gui;
 
     void createNewShip(GameObject ship)
     {
@@ -28,6 +29,7 @@ public class WaveGeneratorScript : MonoBehaviour
 
     void Start()
     {
+        gui = GameObject.Find("GUICanvas").GetComponent<GUIScript>();
         foreach(var wave in WaveProperties)
         {
             wave.CurrentSpawnRatePerSecond = 0;
@@ -45,11 +47,11 @@ public class WaveGeneratorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float now = Time.time;
+        float now = Time.time - gui.StartTime;
 
         foreach (var wave in WaveProperties)
         {
-            if(wave.NextIntensification < now)
+            if (wave.NextIntensification < now)
             {
                 wave.CurrentSpawnRatePerSecond = Math.Min(wave.UnitSpawnRatePerSecond + wave.CurrentSpawnRatePerSecond, wave.MaxSpawnRate);
                 wave.NextIntensification += wave.IntensificationInterval;

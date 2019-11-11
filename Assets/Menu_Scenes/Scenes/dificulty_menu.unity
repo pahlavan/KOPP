@@ -275,8 +275,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: f76a2a9538df5f04ca3914b89e125b0a, type: 3}
     m_FontSize: 30
@@ -559,8 +557,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: f76a2a9538df5f04ca3914b89e125b0a, type: 3}
     m_FontSize: 60
@@ -710,7 +706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d9525d747418d49a0a085266359561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: Main_game
+  SceneName: Story1
   DelayTimer: 0.4
 --- !u!1 &1242450574
 GameObject:

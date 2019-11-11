@@ -32,12 +32,12 @@ public class GUIScript : MonoBehaviour
     public static readonly int MaxPower = 3;
     public static readonly int OverheatCooldown = 32;
     public static readonly float MaxHeat = 20;
+    public float StartTime = 0;
 
     private List<List<Sprite>> sprites;
     private SpriteRenderer bossHologram;
     private GameObject[] gauges;
     private GameObject[] damageIcons;
-    private float startTime;
     private DialogScript dialog;
     private bool isGameOver = false;
     private float finishTime = 0;
@@ -53,7 +53,7 @@ public class GUIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startTime = Time.time;
+        StartTime = Time.time;
         sprites = new List<List<Sprite>>()
         {
             dangerDialSprites,
@@ -104,7 +104,7 @@ public class GUIScript : MonoBehaviour
 
     void UpdateTimer()
     {
-        TimeSpan timeSpan = TimeSpan.FromSeconds((isGameOver ? finishTime : Time.time) - startTime);
+        TimeSpan timeSpan = TimeSpan.FromSeconds((isGameOver ? finishTime : Time.time) - StartTime);
         string timeStr = string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
         GameObject.Find("Timer").GetComponent<Text>().text = timeStr;
     }
