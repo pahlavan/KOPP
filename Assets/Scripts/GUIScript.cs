@@ -77,7 +77,13 @@ public class GUIScript : MonoBehaviour
             delta *= 3;
 
         Heat = Math.Max(0, Heat - delta);
-        bossHologram.enabled = isOverheat || ((Heat / MaxHeat) > 0.65);
+        if (isOverheat || ((Heat / MaxHeat) > 0.65))
+        {
+            bossHologram.enabled = true;
+        } else if (!dialog.isOpen)
+        {
+            bossHologram.enabled = false;
+        }
 
         if (isOverheat && Heat == 0)
         {
@@ -94,6 +100,11 @@ public class GUIScript : MonoBehaviour
             GameObject.Find("GameOverText").GetComponent<Text>().enabled = true;
             finishTime = Time.time;
             UpdateTimer();
+            dialog.showNewMessage(DialogSource.Humen, "Great! We are safe. Thank you!");
+        }
+
+        if (!isGameOver) {
+            dialog.showNewMessage(DialogSource.Commander, "Good job! One more survivor!");
         }
     }
 
