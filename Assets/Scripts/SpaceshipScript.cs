@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Experimental.U2D;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class SpaceshipScript : MonoBehaviour
     public int MaxFuel = 100;
     public float ShipVelocity;
     public GameObject ShipBody;
+    public GameObject Explosion;
 
     private bool inFlight = true;
     private bool isInitialized = false;
@@ -20,6 +22,7 @@ public class SpaceshipScript : MonoBehaviour
     private GameObject nextHop;
     private GameObject lastHop;
     private GUIScript gui;
+    private float deathTime;
 
     void SelectNextHop()
     {
@@ -57,6 +60,7 @@ public class SpaceshipScript : MonoBehaviour
     {
         fuel = MaxFuel;
         gui = GameObject.Find("GUICanvas").GetComponent<GUIScript>();
+        deathTime = -1;
     }
 
     void AdjustShipRotation()
@@ -77,7 +81,7 @@ public class SpaceshipScript : MonoBehaviour
             isInitialized = true;
         }
 
-        if (inFlight)
+        if (inFlight && deathTime < 0)
         {
             if (nextHop.GetComponent<PlanetScript>().planetState == PlanetState.DangerZone)
             {
@@ -98,11 +102,23 @@ public class SpaceshipScript : MonoBehaviour
                     SelectNextHop();
                 }
             }
+
+            AdjustShipRotation();
+
+            if (!inFlight)
+            {
+                deathTime = 0;
+            }
+
+            if (fuel <= 0)
+            {
+                ShipVelocity = 0;
+                Explosion.SetActive(false);
+                deathTime = Time.time + 2;
+            }
         }
 
-        AdjustShipRotation();
-
-        if (fuel <= 0 || !inFlight)
+        if (deathTime > 0 && Time.time > deathTime)
         {
             Destroy(gameObject);
         }
